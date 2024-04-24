@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element= {<LandingPage/>}/>
-        <Route path="/dentro" element = {<Dentro/>} />
-        <Route path="/pruebar" element = {<PruebaRuta/>} />
+        <Route exact path="/dentro" element = {<Dentro/>} />
+        <Route exact path="/pruebar" element = {<PruebaRuta/>} />
       </Routes>
     </BrowserRouter>
     
