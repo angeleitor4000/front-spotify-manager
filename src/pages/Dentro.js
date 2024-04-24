@@ -6,7 +6,7 @@ export default function Dentro(){
 
     async function playlist() {
         try {
-            const response = await fetch("http://https://back-spotify-manager-angeleitor4000.onrender.com/playlist");
+            const response = await fetch("https://back-spotify-manager-angeleitor4000.onrender.com/playlist");
             const data = await response.json();
             setResultado(data);
 
