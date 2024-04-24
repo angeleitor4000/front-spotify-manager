@@ -44,7 +44,7 @@ export default function Dentro(){
             <h1>Dentro</h1>
 
             <p>{resultado.item ? (resultado.item.name + " BY: " + resultado.item.album.artists[0].name) : ''}</p>
-            <img src={resultado.item ? resultado.item.album.images[0].url : ''}></img>
+            <img src={resultado.item ? resultado.item.album.images[0].url : ''} alt=""></img>
 
         </>
     );

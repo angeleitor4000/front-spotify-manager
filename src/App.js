@@ -1,4 +1,4 @@
-import {  HashRouter, BrowserRouter, Routes, Route } from "react-router-dom";
+import {  HashRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Dentro from "./pages/Dentro";
 import PruebaRuta from "./pages/PruebaRuta";
