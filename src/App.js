@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element= {<LandingPage/>}/>
-        <Route exact path="/dentro" element = {<Dentro/>} />
-        <Route exact path="/pruebar" element = {<PruebaRuta/>} />
+        <Route path="https://front-spotify-manager-angeleitor4000.onrender.com/dentro" element = {<Dentro/>} />
+        <Route path="https://front-spotify-manager-angeleitor4000.onrender.com/pruebar" element = {<PruebaRuta/>} />
       </Routes>
     </BrowserRouter>
     
