@@ -12,11 +12,24 @@ export default function Dentro(){
     const [cargado, setCargado] = useState(true);
 
     
+
     if(cargado){
         setCargado(false)
         //setTimeout(currentuser(), 2000)
+        
+        refreshlogin()
         currentuser()
     }
+
+    async function refreshlogin(){
+        try{
+            window.location.href = "http://localhost:3000/refreshlogin"
+            console.log("yee")
+        }catch(error){
+            console.error('Error refreshing credentials: ', error);
+        }
+    }
+
 
     async function playlist() {
         try {
