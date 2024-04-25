@@ -1,0 +1,24 @@
+@font-face{
+    font-family: "circular_regular";
+    src: local("PlusJakartaSans-Regular"),
+        url("../fonts/PlusJakartaSans-Regular.ttf") format("truetype");
+}
+
+
+body{
+    background-color: rgb(26, 26, 26);
+}
+
+
+*{
+    color: white;
+    font-family: "circular_regular";
+}
+button{
+    background-color: #1DB954;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 28px;
+    border: none;
+    font-family: "circular_regular";
+}

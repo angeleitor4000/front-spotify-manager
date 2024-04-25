@@ -1,0 +1,19 @@
+- paginas:
+
+landingpage
+home (antiguo dentro)
+  misplaylists
+    verplaylist (por playlist) 
+  albunesguardados
+    veralbum (por album) 
+  artistasseguidos
+    ?verartista (por artista)
+      
+
+
+- componentes:
+
+header
+(solo sesion iniciada) actualmente "muestra datos usuario y actualmente escuchando"
+
+?footer

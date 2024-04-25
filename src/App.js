@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Dentro from "./pages/Dentro";
 import PruebaRuta from "./pages/PruebaRuta";
+import "./styles/App.css";
 
 function App() {
   return (
