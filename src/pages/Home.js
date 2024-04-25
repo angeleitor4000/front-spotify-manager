@@ -7,7 +7,7 @@ export default function Dentro(){
         width: 300
     };
 
-    const [resultado, setResultado] = useState([]);
+    const [actualTrack, setActualTrack] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
     const [cargado, setCargado] = useState(true);
 
@@ -31,12 +31,12 @@ export default function Dentro(){
     }
 
 
-    async function playlist() {
+    async function getActualTrack() {
         try {
             //const response = await fetch("https://back-spotify-manager-angeleitor4000.onrender.com/playlist");
-            const response = await fetch("http://localhost:3000/playlist");
+            const response = await fetch("http://localhost:3000/getactualtrack");
             const data = await response.json();
-            setResultado(data);
+            setActualTrack(data);
 
             
             // Verificar si data.item está definido antes de acceder a sus propiedades
@@ -47,8 +47,6 @@ export default function Dentro(){
                 console.log(data.item.album.images[0].url);
                 console.log(data.item.is_local)
                 */
-
-
 
             }
 
@@ -92,10 +90,10 @@ export default function Dentro(){
     }
     
     useEffect(() => {
-        playlist();
+        getActualTrack();
 
         const intervalId = setInterval(() => {
-            playlist();
+            getActualTrack();
         }, 500);
 
         // Limpiar el intervalo cuando el componente se desmonte para evitar fugas de memoria
@@ -111,13 +109,16 @@ export default function Dentro(){
         <>
             <h1>Dentro</h1>
 
+            <a href="/"><button>VOLVER</button></a>
+
             <p>{currentUser ? currentUser.display_name : ''}</p>
             <img src={currentUser &&  ((currentUser.images) ? currentUser.images[1].url : '')} alt="" style={imgestilo}></img>
 
 
-            <p>{resultado.item && ((!resultado.item.is_local ? (resultado.item.name + " BY: " + resultado.item.artists[0].name) : ''))}</p>
-            <img src={resultado.item && (!resultado.item.is_local ? resultado.item.album.images[0].url : '')} alt="" style={imgestilo}></img>
+            <p>{actualTrack.item && ((!actualTrack.item.is_local ? (actualTrack.item.name + " BY: " + actualTrack.item.artists[0].name) : ''))}</p>
+            <img src={actualTrack.item && (!actualTrack.item.is_local ? actualTrack.item.album.images[0].url : '')} alt="" style={imgestilo}></img>
 
+            <p>{!actualTrack.item && 'Actualmente no estas escuchando nada'}</p>
 
         </>
     );

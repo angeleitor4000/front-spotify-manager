@@ -3,6 +3,16 @@
     src: local("PlusJakartaSans-Regular"),
         url("../fonts/PlusJakartaSans-Regular.ttf") format("truetype");
 }
+@font-face{
+    font-family: "circular_extrabold";
+    src: local("PlusJakartaSans-ExtraBold"),
+        url("../fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
+}
+@font-face{
+    font-family: "circular_semibold";
+    src: local("PlusJakartaSans-SemiBold"),
+        url("../fonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
+}
 
 
 body{
@@ -14,6 +24,13 @@ body{
     color: white;
     font-family: "circular_regular";
 }
+
+h1{
+    color: white;
+    font-family: "circular_semibold";
+}
+
+
 button{
     background-color: #1DB954;
     padding: 10px 30px;

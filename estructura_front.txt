@@ -8,12 +8,14 @@ home (antiguo dentro)
     veralbum (por album) 
   artistasseguidos
     ?verartista (por artista)
-      
-
+  perfil (enlace ubicado en el header)
+  ?buscador (busqueda en el header)
+    ?resultadobusqueda (similar a verplaylist)
 
 - componentes:
 
 header
-(solo sesion iniciada) actualmente "muestra datos usuario y actualmente escuchando"
+(solo sesion iniciada) hola "muestra datos usuario"
+(solo sesion iniciada) escuchando "actualmente escuchando"
 
 ?footer
