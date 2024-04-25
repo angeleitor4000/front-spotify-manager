@@ -93,7 +93,7 @@ export default function Dentro(){
         <>
             <h1>Dentro</h1>
 
-            <p>{currentUser.display_name}</p>
+            <p>{currentUser.display_name + " FROM:"}</p>
             <img src={currentUser.images[1].url} alt="" style={imgestilo}></img>
 
 
