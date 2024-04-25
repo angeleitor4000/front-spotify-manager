@@ -11,6 +11,7 @@ export default function Dentro(){
     const [currentUser, setCurrentUser] = useState([]);
     const [cargado, setCargado] = useState(true);
 
+    
     if(cargado){
         setCargado(false)
         //setTimeout(currentuser(), 2000)
@@ -47,6 +48,7 @@ export default function Dentro(){
 
     async function currentuser() {
         try {
+
             //const response = await fetch("https://back-spotify-manager-angeleitor4000.onrender.com/playlist");
             const response = await fetch("http://localhost:3000/user");
             const data = await response.json();
@@ -56,6 +58,7 @@ export default function Dentro(){
             if (data) {
 
                 console.log(data);
+                //console.log(currentUser.images)
                 /*
                 console.log(data.item);
                 console.log(data.item.name);
@@ -63,9 +66,11 @@ export default function Dentro(){
                 console.log(data.item.is_local)
                 */
 
-
-                await timeout(2000)
             }
+
+              
+            await timeout(2000)
+
 
         } catch (error) {
             console.error('Error fetching user:', error);
@@ -93,8 +98,8 @@ export default function Dentro(){
         <>
             <h1>Dentro</h1>
 
-            <p>{currentUser.display_name + " FROM:"}</p>
-            <img src={currentUser.images[1].url} alt="" style={imgestilo}></img>
+            <p>{currentUser ? currentUser.display_name : ''}</p>
+            <img src={currentUser &&  ((currentUser.images) ? currentUser.images[1].url : '')} alt="" style={imgestilo}></img>
 
 
             <p>{resultado.item && ((!resultado.item.is_local ? (resultado.item.name + " BY: " + resultado.item.artists[0].name) : ''))}</p>
