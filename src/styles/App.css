@@ -30,12 +30,12 @@ h1{
     font-family: "circular_semibold";
 }
 
-
 button{
     background-color: #1DB954;
-    padding: 10px 30px;
+    color: black;
+    padding: 15px 30px;
     border-radius: 30px;
     font-size: 28px;
     border: none;
-    font-family: "circular_regular";
+    font-family: "circular_semibold";
 }
