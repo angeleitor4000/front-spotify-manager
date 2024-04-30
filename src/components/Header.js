@@ -63,9 +63,9 @@ export default function Header() {
         <div style={headerStyle}>
             {headerWidth >= 400 ? (
                 <>
-                    <img src={logo} alt="logo" style={imgStyle} />
+                    <a href='/'><img src={logo} alt="logo" style={imgStyle} /></a>
                     <div style={titleStyle}>
-                        <h1>SPOTIFY MANAGER</h1>
+                        <a href='/'><h1>SPOTIFY MANAGER</h1></a>
                     </div>
                     {/* Este espacio vacío ayudará a empujar el título al centro */}
                     <div style={spaceStyle}></div>

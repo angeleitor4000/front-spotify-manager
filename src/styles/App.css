@@ -39,3 +39,8 @@ button{
     border: none;
     font-family: "circular_semibold";
 }
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
