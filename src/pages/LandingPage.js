@@ -6,7 +6,7 @@ export default function LandingPage() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "50vh",
+        minHeight: "45vh",
         backgroundColor: "rgb(26, 26, 26)",
         padding: "40px 20px",
         textAlign: "center",
