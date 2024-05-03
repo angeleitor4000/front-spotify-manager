@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import Escuchando from "../components/Escuchando";
+import Hola from "../components/Hola";
 
 export default function Dentro(){
 
+    
     const imgestilo = {
         heigh: 300,
         width: 300
     };
+
 
     const [actualTrack, setActualTrack] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
@@ -112,11 +115,9 @@ export default function Dentro(){
 
             <a href="/"><button>VOLVER</button></a>
 
-            <p>{currentUser ? currentUser.display_name : ''}</p>
-            <img src={currentUser &&  ((currentUser.images) ? currentUser.images[1].url : '')} alt="" style={imgestilo}></img>
+            <Escuchando actualTrack={actualTrack} imgestilo={imgestilo}/>
+            <Hola currentUser={currentUser} imgestilo={imgestilo}/>
 
-
-            <Escuchando actualTrack={actualTrack}/>
 
         </>
     );

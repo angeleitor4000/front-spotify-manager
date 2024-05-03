@@ -1,12 +1,8 @@
 export default function Escuchando(props){
 
-    const imgestilo = {
-        heigh: 300,
-        width: 300
-    };
-
     const { actualTrack } = props; // Extraer actualTrack de las props recibidas
-    
+    const { imgestilo } = props;
+
     return(
         <div>
             <p>{actualTrack.item && ((!actualTrack.item.is_local ? (actualTrack.item.name + " BY: " + actualTrack.item.artists[0].name) : ''))}</p>
