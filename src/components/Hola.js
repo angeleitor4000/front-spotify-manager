@@ -1,16 +1,15 @@
-export default function Hola(props){
+import React from "react";
+import "../styles/HolaEscuchandoEstilo.css";
 
-
+export default function Hola(props) {
     const { currentUser } = props;
-    const { imgestilo } = props;
 
     return (
-
-        <div>
+        <div className="hola-escuchando-container">
             <p>{currentUser ? currentUser.display_name : ''}</p>
-            <img src={currentUser &&  ((currentUser.images) ? currentUser.images[1].url : '')} alt="" style={imgestilo}></img>
-
+            {currentUser && currentUser.images && (
+                <img src={currentUser.images[1].url} alt="" className="imagen-hola"></img>
+            )}
         </div>
-    )
-
+    );
 }

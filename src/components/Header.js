@@ -23,6 +23,7 @@ export default function Header() {
         alignItems: "center", // Para alinear verticalmente en el centro
         padding: "10px 20px", // Añade padding para espaciar el contenido del borde
         width: "95%", // Establece el ancho del contenedor principal al 100% de la página
+        borderBottom: "1px solid #515151",
     };
 
     const imgStyle = {

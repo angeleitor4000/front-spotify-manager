@@ -1,0 +1,18 @@
+.hola-escuchando-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imagen-escuchando {
+    max-width: 100%;
+    height: auto;
+}
+
+.imagen-hola {
+    width: 100%; 
+    height: auto; 
+    max-width: none; 
+    display: block; 
+}
