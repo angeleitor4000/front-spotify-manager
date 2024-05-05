@@ -1,7 +1,9 @@
 .container {
     display: flex;
-    height: 100vh;
+    height: auto;
     margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .izquierda,

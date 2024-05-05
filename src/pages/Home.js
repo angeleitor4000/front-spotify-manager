@@ -15,15 +15,20 @@ export default function Dentro() {
         refreshlogin()
         currentuser()
     }
-
     async function refreshlogin() {
         try {
-            window.location.href = "http://localhost:3000/refreshlogin"
-            console.log("yee")
+            const response = await fetch("http://localhost:3000/refreshlogin");
+            if (response.redirected) {
+                // Redirigir al URL indicado por el servidor
+                window.location.href = response.url;
+            } else {
+                console.log("Credentials refreshed successfully");
+            }
         } catch (error) {
             console.error('Error refreshing credentials: ', error);
         }
     }
+    
 
     async function getActualTrack() {
         try {
