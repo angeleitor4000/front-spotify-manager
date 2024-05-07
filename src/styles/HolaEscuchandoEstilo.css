@@ -16,3 +16,8 @@
     max-width: none; 
     display: block; 
 }
+
+p{
+    text-align: center;
+    max-width: 160px;
+}
