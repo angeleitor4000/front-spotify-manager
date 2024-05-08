@@ -14,9 +14,9 @@
         url("../fonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
 }
 
-
 body{
     background-color: rgb(26, 26, 26);
+    margin: 0;
 }
 
 
