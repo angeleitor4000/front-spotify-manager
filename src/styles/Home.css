@@ -1,31 +1,42 @@
+.home-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.home-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+
 .container {
     display: flex;
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: stretch; /* Estira los elementos para que coincidan en altura */
-    margin-top: 90px;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 50px;
 }
 
 .izquierda,
 .derecha {
     width: 20%;
-    margin-right: 20px; 
-    margin-left: 20px;  
+    margin-right: 20px;
+    margin-left: 20px;
     background-color: #282828;
     padding: 20px;
     border-radius: 10px;
     color: white;
-    
 }
 
 .cuerpo {
     padding: 20px;
-    flex-grow: 1; /* Ocupa todo el espacio disponible verticalmente */
+    flex-grow: 1;
     background-color: #282828;
     border-radius: 10px;
     color: white;
 }
 
-.derecha img, .izquierda img {
+.derecha img,
+.izquierda img {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }

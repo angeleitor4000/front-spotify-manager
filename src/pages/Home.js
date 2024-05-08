@@ -21,15 +21,16 @@ export default function Home({ currentUser, actualTrack }) {
         // Redirigir al URL indicado por el servidor
         window.location.href = response.url;
       } else {
-        console.log("Credentials refreshed successfully");
+        console.log("Credenciales actualizadas exitosamente");
       }
     } catch (error) {
-      console.error("Error refreshing credentials: ", error);
+      console.error("Error al actualizar credenciales: ", error);
     }
   }
 
   return (
-    <div>
+    <div className="home-container">
+      <h1 className="home-title">¡BIENVENIDO!</h1>
 
       <div className="container">
         <div className="izquierda">
@@ -45,7 +46,6 @@ export default function Home({ currentUser, actualTrack }) {
         </div>
       </div>
 
-      <h1>Dentro</h1>
       <a href="/">
         <button>VOLVER</button>
       </a>
