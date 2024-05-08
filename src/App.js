@@ -1,9 +1,9 @@
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import PruebaRuta from "./pages/PruebaRuta";
 import ErrorPage from "./pages/ErrorPage";
-import { useState, useEffect } from "react";
 import "./styles/App.css";
 
 function App() {
@@ -12,7 +12,11 @@ function App() {
 
   useEffect(() => {
     getCurrentUser();
-    getActualTrack();
+    const interval = setInterval(getActualTrack, 500);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   async function getCurrentUser() {
