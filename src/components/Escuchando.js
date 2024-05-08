@@ -6,12 +6,18 @@ export default function Escuchando(props) {
 
     return (
         <div className="hola-escuchando-container">
-            <p>{actualTrack.item && ((!actualTrack.item.is_local ? (actualTrack.item.name + " BY: " + actualTrack.item.artists[0].name) : ''))}</p>
+            
+            {actualTrack.item && ((!actualTrack.item.is_local ? (
+                <p>{actualTrack.item.name} BY: {actualTrack.item.artists[0].name}</p>
+            ) : (
+                <p>''</p>
+            )))}
+            
             {actualTrack.item && !actualTrack.item.is_local && (
                 <img src={actualTrack.item.album.images[0].url} alt="" className="imagen-escuchando"></img>
             )}
-            <p>{actualTrack.item && ((actualTrack.item.is_local && 'Cancion local: No se puede recuperar datos'))}</p>
-            <p>{!actualTrack.item && 'Actualmente no estas escuchando nada'}</p>
+            {actualTrack.item && ((actualTrack.item.is_local && <p>Cancion local: No se puede recuperar datos</p>))}
+            {!actualTrack.item && <p>Actualmente no estas escuchando nada</p>}
         </div>
     );
 }

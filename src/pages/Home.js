@@ -2,6 +2,7 @@ import "../styles/Home.css";
 import { useState, useEffect } from "react";
 import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
+import Targeta from "../components/Targeta";
 
 export default function Home({ currentUser, actualTrack }) {
   const [cargado, setCargado] = useState(true);
@@ -29,20 +30,25 @@ export default function Home({ currentUser, actualTrack }) {
 
   return (
     <div>
-      <h1>Dentro</h1>
-      <a href="/">
-        <button>VOLVER</button>
-      </a>
 
       <div className="container">
         <div className="izquierda">
           <Hola currentUser={currentUser} />
         </div>
-        <div className="cuerpo">{/* Contenido del cuerpo */}</div>
+
+        <div className="cuerpo">
+          <Targeta/>
+        </div>
+
         <div className="derecha">
           <Escuchando actualTrack={actualTrack} />
         </div>
       </div>
+
+      <h1>Dentro</h1>
+      <a href="/">
+        <button>VOLVER</button>
+      </a>
     </div>
   );
 }

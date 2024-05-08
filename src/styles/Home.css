@@ -1,32 +1,32 @@
 .container {
     display: flex;
-    height: auto;
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-right: 30px;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: stretch; /* Estira los elementos para que coincidan en altura */
+    margin-top: 90px;
 }
 
 .izquierda,
 .derecha {
     width: 20%;
-
-}
-
-.cuerpo {
-    flex-grow: 1;
-
-}
-
-
-.izquierda,
-.derecha {
+    margin-right: 10px; 
+    margin-left: 10px;  
     background-color: #282828;
     padding: 20px;
     border-radius: 10px;
     color: white;
 }
 
-.derecha img {
+.cuerpo {
+    padding: 20px;
+    flex-grow: 1; /* Ocupa todo el espacio disponible verticalmente */
+    margin-right: 10px;
+    margin-left: 10px; 
+    background-color: #282828;
+    border-radius: 10px;
+    color: white;
+}
+
+.derecha img, .izquierda img {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
