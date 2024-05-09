@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
 import Targeta from "../components/Targeta";
-import logo from "../images/slogo.png";
 
 export default function Home({ currentUser, actualTrack }) {
   const [cargado, setCargado] = useState(true);
@@ -19,7 +18,7 @@ export default function Home({ currentUser, actualTrack }) {
     try {
       const response = await fetch("http://localhost:3000/refreshlogin");
       if (response.redirected) {
-        // Redirigir al URL indicado por el servidor
+        //redireccion desde la api, no olvidar
         window.location.href = response.url;
       } else {
         console.log("Credenciales actualizadas exitosamente");
@@ -39,10 +38,39 @@ export default function Home({ currentUser, actualTrack }) {
         </div>
 
         <div className="cuerpo">
-          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
-          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
-          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
-          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
+          {actualTrack.item && !actualTrack.item.is_local && (
+            <Targeta image={actualTrack.item.album.images[0].url} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+
+          )}
         </div>
 
         <div className="derecha">
@@ -51,7 +79,7 @@ export default function Home({ currentUser, actualTrack }) {
       </div>
 
       <a href="/">
-        <button style={{marginTop: "50px"}}>VOLVER</button>
+        <button style={{ marginTop: "50px", marginBottom: "50px" }}>VOLVER</button>
       </a>
     </div>
   );
