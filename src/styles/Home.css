@@ -33,7 +33,16 @@
     background-color: #282828;
     border-radius: 10px;
     color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
+
+.cuerpo .targeta-card {
+    flex-basis: calc(25.00% - 20px);
+    margin-bottom: 20px;
+}
+
 
 .derecha img,
 .izquierda img {

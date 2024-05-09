@@ -19,8 +19,8 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding: 10px 20px;
-    width: 95%;
+    padding: 10px 0;
+    width: 100%;
     background-color: #282828;
 }
 

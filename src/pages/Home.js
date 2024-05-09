@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
 import Targeta from "../components/Targeta";
+import logo from "../images/slogo.png";
 
 export default function Home({ currentUser, actualTrack }) {
   const [cargado, setCargado] = useState(true);
@@ -38,7 +39,10 @@ export default function Home({ currentUser, actualTrack }) {
         </div>
 
         <div className="cuerpo">
-          <Targeta/>
+          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
+          <Targeta image={logo} titulo="Prueba" descripcion="Descripcion lorem itsum" botonTexto="VER" currentUser={currentUser} actualTrack={actualTrack} />
         </div>
 
         <div className="derecha">
@@ -47,7 +51,7 @@ export default function Home({ currentUser, actualTrack }) {
       </div>
 
       <a href="/">
-        <button>VOLVER</button>
+        <button style={{marginTop: "50px"}}>VOLVER</button>
       </a>
     </div>
   );
