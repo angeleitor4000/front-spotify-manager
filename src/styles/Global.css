@@ -1,0 +1,104 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Cambiado de 'stretch' a 'flex-start' */
+    margin-top: 50px;
+}
+
+.izquierda,
+.derecha {
+    width: 20%;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    min-height: 300px; /* Altura mínima para izquierda y derecha */
+}
+
+.cuerpo {
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #282828;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 50%;
+    align-items: flex-start; /* Cambiado de 'stretch' a 'flex-start' */
+}
+
+.cuerpo .targeta-card {
+    flex-basis: calc(25.00% - 20px);
+    margin-bottom: 20px;
+}
+
+.derecha img,
+.izquierda img {
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .izquierda {
+        order: 2;
+    }
+
+    .derecha {
+        order: 3;
+    }
+
+    .cuerpo {
+        order: 1;
+        max-width: 100%;
+    }
+
+    .izquierda,
+    .derecha,
+    .cuerpo {
+        width: 80%;
+        margin: 10px;
+    }
+
+    .cuerpo .targeta-card {
+        flex-basis: calc(100% - 20px); /* Una tarjeta por fila */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cuerpo .targeta-card {
+        flex-basis: calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .izquierda {
+        order: 2;
+    }
+
+    .derecha {
+        order: 3;
+    }
+
+    .cuerpo {
+        order: 1;
+        max-width: 100%;
+    }
+
+    .izquierda,
+    .derecha,
+    .cuerpo {
+        width: 80%;
+        margin: 10px;
+    }
+
+}

@@ -3,7 +3,7 @@
     border-radius: 8px;
     overflow: hidden;
     display: flex;
-    flex-direction: column; /* Ajuste para que los elementos estén apilados verticalmente */
+    flex-direction: column;
     margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -29,16 +29,18 @@
 
 .targeta-contenido-section {
     background-color: #202020;
+    padding: 0 20px;
 }
 
+.targeta-contenido {
+    padding-bottom: 20px;
+}
 
-.targeta-contenido-section button {
+.targeta-contenido button {
     margin-top: 10px;
-    margin-bottom: 20px;
     padding: 5px 30px;
     font-size: 22px;
 }
-
 
 .targeta-titulo {
     font-size: 1.5rem;
@@ -47,4 +49,5 @@
 
 .targeta-descripcion {
     margin-bottom: 10px;
+    word-wrap: break-word;
 }

@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import PruebaRuta from "./pages/PruebaRuta";
 import ErrorPage from "./pages/ErrorPage";
 import "./styles/App.css";
+import "./styles/Global.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);

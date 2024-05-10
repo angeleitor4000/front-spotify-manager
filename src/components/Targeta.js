@@ -1,6 +1,6 @@
 import '../styles/Targeta.css';
 
-export default function Targeta({ image, titulo, descripcion, botonTexto }) {
+export default function Targeta({ image, titulo, descripcion, botonTexto, direccion }) {
     return (
         <div className="targeta-card">
             <div className="targeta-imagen-section">
@@ -10,7 +10,7 @@ export default function Targeta({ image, titulo, descripcion, botonTexto }) {
                 <div className="targeta-contenido">
                     <h2 className="targeta-titulo">{titulo}</h2>
                     <p className="targeta-descripcion">{descripcion}</p>
-                    <a href="/">
+                    <a href={direccion}>
                         <button>{botonTexto}</button>
                     </a>
                 </div>
