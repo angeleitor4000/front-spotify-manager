@@ -9,11 +9,14 @@
 }
 
 .targeta-imagen-section {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+.targeta-imagen-section.grid-layout {
+    flex-wrap: wrap;
 }
 
 .targeta-imagen-section img {
@@ -27,13 +30,20 @@
     width: 100%;
 }
 
+.targeta-imagen.multi-image {
+    width: 50%;
+}
+
+
 .targeta-contenido-section {
     background-color: #202020;
     padding: 0 20px;
 }
 
 .targeta-contenido {
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
 }
 
 .targeta-contenido button {
@@ -45,6 +55,7 @@
 .targeta-titulo {
     font-size: 1.5rem;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .targeta-descripcion {

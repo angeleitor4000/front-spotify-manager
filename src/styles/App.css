@@ -28,6 +28,7 @@ body{
 h1{
     color: white;
     font-family: "circular_semibold";
+    text-align: center;
 }
 
 button{
@@ -38,9 +39,14 @@ button{
     font-size: 28px;
     border: none;
     font-family: "circular_semibold";
+    text-align: center;
 }
 
 a{
+    display: flex;
+    justify-content: center;
     text-decoration: none;
     color: inherit;
+    text-align: center;
+    
 }

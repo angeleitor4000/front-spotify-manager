@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import PruebaRuta from "./pages/PruebaRuta";
 import ErrorPage from "./pages/ErrorPage";
+import Misplaylists from "./pages/Misplaylists";
 import "./styles/App.css";
 import "./styles/Global.css";
 
@@ -49,6 +50,7 @@ function App() {
           element={<Home currentUser={currentUser} actualTrack={actualTrack} />}
         />
         <Route path="/pruebar" element={<PruebaRuta />} />
+        <Route path="/playlistshome" element={<Misplaylists />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
