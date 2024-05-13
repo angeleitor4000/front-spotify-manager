@@ -6,6 +6,7 @@ import Targeta from "../components/Targeta";
 export default function Home({ currentUser, actualTrack, playlists }) {
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
 
     if (loading) {
@@ -40,12 +41,13 @@ export default function Home({ currentUser, actualTrack, playlists }) {
           <Targeta
             playlists={playlists ? playlists : 'URL_POR_DEFECTO'}
             titulo="Mis playlists"
-            descripcion="Mira, edita, crea o elimina playlists!"
+            descripcion="Mira, modifica, crea o elimina playlists!"
             botonTexto="VER"
             direccion="/playlistshome"
             currentUser={currentUser}
             contexto="playlists"
           />
+          
 
         </div>
 

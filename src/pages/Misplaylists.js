@@ -43,11 +43,12 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
                             return <Targeta key={index}
                             playlists={playlist ? playlist.images[0].url : 'URL_POR_DEFECTO'}
                             titulo={playlist ? playlist.name : 'SIN NOMBRE'}
-                            descripcion={playlist ? playlist.description : 'SIN NOMBRE'}
+                            descripcion={playlist ? playlist.description : ''}
                             botonTexto="VER"
-                            direccion="/verplaylist"
+                            direccion={`/verplaylist/${playlist.id}`}
                             currentUser={currentUser}
                             contexto="misplaylists"
+                            playlistid={playlist.id}
                           />;
                         })}
 
@@ -58,7 +59,7 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
                 </div>
             </div>
 
-            <a href="/">
+            <a href="/home">
                 <button style={{ marginTop: "50px", marginBottom: "50px" }}>VOLVER</button>
             </a>
 

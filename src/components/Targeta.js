@@ -21,6 +21,10 @@ export default function Targeta({ playlists, currentUser, titulo, descripcion, b
         }
     }
 
+    if(contexto === "libre"){
+       images = [playlists]
+    }
+
     // Si no hay imágenes, usar la imagen de stock
     const displayImages = images.length > 0 ? images : [noImagePlaylist];
 

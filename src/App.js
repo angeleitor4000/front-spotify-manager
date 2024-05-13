@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import PruebaRuta from "./pages/PruebaRuta";
 import ErrorPage from "./pages/ErrorPage";
 import Misplaylists from "./pages/Misplaylists";
+import Verplaylist from "./pages/Verplaylist";
 import "./styles/App.css";
 import "./styles/Global.css";
 
@@ -63,6 +64,7 @@ function App() {
           element={<Home currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>}
         />
         <Route path="/playlistshome" element={<Misplaylists currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
+        <Route path="/verplaylist/:playlistid" element={<Verplaylist currentUser={currentUser} actualTrack={actualTrack} />} />
         <Route path="/pruebar" element={<PruebaRuta />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
