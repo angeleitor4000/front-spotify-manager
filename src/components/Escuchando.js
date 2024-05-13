@@ -6,7 +6,7 @@ export default function Escuchando(props) {
 
     return (
         <div className="hola-escuchando-container">
-            <h1>Estas escuchando:</h1>
+            {actualTrack.item && <h1>Estas escuchando:</h1>}
             {actualTrack.item && ((!actualTrack.item.is_local ? (
                 <p>"{actualTrack.item.name}" <i>&nbsp;de:&nbsp;&nbsp;</i> {actualTrack.item.artists[0].name}</p>
             ) : (
