@@ -38,27 +38,30 @@
 .targeta-contenido-section {
     background-color: #202020;
     padding: 0 20px;
+    flex-grow: 1; /* Hace que la sección ocupe todo el espacio disponible */
 }
-
 .targeta-contenido {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
+    align-items: center;
+    justify-content: space-between; /* Alinea los elementos verticalmente y distribuye el espacio entre ellos */
+    height: 100%; /* Asegura que la altura de la sección sea el 100% del contenedor */
 }
-
 .targeta-contenido button {
-    margin-top: 10px;
+    margin-top: auto; /* El botón se colocará siempre al final de la sección */
+    margin-bottom: 15px; /* Añade un margen inferior adicional para separarlo del borde */
     padding: 5px 30px;
     font-size: 22px;
 }
 
 .targeta-titulo {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    margin-bottom: 0;
     text-align: center;
 }
 
 .targeta-descripcion {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 5px;
     word-wrap: break-word;
 }

@@ -3,13 +3,23 @@ import noImagePlaylist from '../images/NoImagePlaylist.png'; // Ruta de la image
 
 export default function Targeta({ playlists, currentUser, titulo, descripcion, botonTexto, direccion, contexto }) {
 
+    let images = []
+
+    if(contexto ==="playlists"){
     // Obtener hasta 4 imágenes de las primeras playlists del usuario actual
-    const images = playlists && playlists.items
+        images = playlists && playlists.items
         ? playlists.items
             .filter(item => item.owner.display_name === currentUser.display_name) // Filtrar las playlists del usuario actual
             .slice(0, 4)
             .map(item => item.images[0].url)
         : [];
+    }
+
+    if(contexto === "misplaylists"){
+        if(playlists.length > 0){
+            images=[playlists]
+        }
+    }
 
     // Si no hay imágenes, usar la imagen de stock
     const displayImages = images.length > 0 ? images : [noImagePlaylist];

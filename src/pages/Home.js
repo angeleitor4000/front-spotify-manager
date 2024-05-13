@@ -3,12 +3,10 @@ import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
 import Targeta from "../components/Targeta";
 
-export default function Home({ currentUser, actualTrack }) {
-  const [playlists, setPlaylists] = useState([]);
+export default function Home({ currentUser, actualTrack, playlists }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPlaylists();
 
     if (loading) {
       setLoading(false);
@@ -26,17 +24,6 @@ export default function Home({ currentUser, actualTrack }) {
       }
     } catch (error) {
       console.error("Error al actualizar credenciales: ", error);
-    }
-  }
-
-  async function getPlaylists() {
-    try {
-      const response = await fetch("http://localhost:3000/getplaylists");
-      const data = await response.json();
-      setPlaylists(data);
-      console.log(data.items[0].images[0].url)
-    } catch (error) {
-      console.error("Error fetching user:", error);
     }
   }
 
@@ -59,7 +46,6 @@ export default function Home({ currentUser, actualTrack }) {
             currentUser={currentUser}
             contexto="playlists"
           />
-
 
         </div>
 

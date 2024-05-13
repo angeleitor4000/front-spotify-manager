@@ -11,9 +11,11 @@ import "./styles/Global.css";
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
   const [actualTrack, setActualTrack] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
 
   useEffect(() => {
     getCurrentUser();
+    getPlaylists()
     const interval = setInterval(getActualTrack, 500);
 
     return () => {
@@ -41,16 +43,27 @@ function App() {
     }
   }
 
+  async function getPlaylists() {
+    try {
+      const response = await fetch("http://localhost:3000/getplaylists");
+      const data = await response.json();
+      setPlaylists(data);
+      console.log(data.items[0].images[0].url)
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route index element={<LandingPage />} />
         <Route
           path="/home"
-          element={<Home currentUser={currentUser} actualTrack={actualTrack} />}
+          element={<Home currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>}
         />
+        <Route path="/playlistshome" element={<Misplaylists currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
         <Route path="/pruebar" element={<PruebaRuta />} />
-        <Route path="/playlistshome" element={<Misplaylists />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

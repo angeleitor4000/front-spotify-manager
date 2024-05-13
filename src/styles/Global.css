@@ -27,8 +27,9 @@
     flex-wrap: wrap;
     justify-content: space-around;
     max-width: 50%;
-    align-items: flex-start; /* Cambiado de 'stretch' a 'flex-start' */
+    align-items: stretch; /* Cambiado de 'flex-start' a 'stretch' */
 }
+
 
 .cuerpo .targeta-card {
     flex-basis: calc(25.00% - 20px);
