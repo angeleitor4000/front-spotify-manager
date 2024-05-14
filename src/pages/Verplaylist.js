@@ -80,8 +80,8 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
                 </div>
             </div>
 
-            <a href="/playlistshome">
-                <button style={{ marginTop: "50px", marginBottom: "50px" }}>VOLVER</button>
+            <a href="/playlistshome" style={{ marginTop: "50px", marginBottom: "50px" }}>
+                <button>VOLVER</button>
             </a>
 
         </div>

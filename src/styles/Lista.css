@@ -1,3 +1,32 @@
+@font-face {
+    font-family: "circular_semibold";
+    src: local("PlusJakartaSans-SemiBold"),
+        url("../fonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
+}
+
+.page-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-controls label {
+    margin-right: 10px;
+}
+
+.page-controls input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+}
+
+.page-controls p {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+
 .lista-table {
     width: 100%;
     border-collapse: collapse;
@@ -14,7 +43,7 @@
 .lista-table th {
     background-color: #282828;
     color: white;
-    
+
 }
 
 .lista-table tbody tr:hover {
@@ -57,8 +86,43 @@
     background-color: #f0f0f0;
 }
 
+input[type="text"] {
+    color: black;
+}
+
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-container button {
+    background-color: #1DB954;
+    color: black;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 20px;
+    border: none;
+    font-family: "circular_semibold";
+    text-align: center;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #1aa34a;
+}
+
+.button-container button:disabled {
+    background-color: #a3a3a3;
+    cursor: not-allowed;
+}
+
+
 
 @media screen and (max-width: 768px) {
+
     .lista-table th:nth-child(2),
     .lista-table td:nth-child(2),
     .lista-table th:nth-child(5),
@@ -67,7 +131,8 @@
     .lista-table td:nth-child(6),
     .lista-table th:nth-child(7),
     .lista-table td:nth-child(7) {
-        display: none; /* Oculta la columna de fecha añadida y duración en pantallas pequeñas */
+        display: none;
+        /* Oculta la columna de fecha añadida y duración en pantallas pequeñas */
     }
 
     .lista-table th,
@@ -76,15 +141,29 @@
         height: 50px;
     }
 
+    /* Reduzca el tamaño de los botones de navegación */
+    .button-container button {
+        padding: 8px 10px;
+        margin-bottom: 10px;
+    }
+
+    .page-controls label,
+    .page-controls input,
+    .page-controls p {
+        margin: 5px 0;
+    }
+
 }
 
 
 @media (min-width: 769px) and (max-width: 1500px) {
+
     .lista-table th:nth-child(6),
     .lista-table td:nth-child(6),
     .lista-table th:nth-child(7),
     .lista-table td:nth-child(7) {
-        display: none; /* Oculta la columna de fecha añadida y duración en pantallas pequeñas */
+        display: none;
+        /* Oculta la columna de fecha añadida y duración en pantallas pequeñas */
     }
 
     .lista-table th,
@@ -95,11 +174,20 @@
     .lista-table img {
         height: 40px;
     }
+
+    /* Reduzca el tamaño de los botones de navegación */
+    .button-container button {
+        padding: 8px 18px;
+        margin-bottom: 10px;
+    }
+
 }
 
 @media screen and (max-width: 350px) {
+
     .lista-table th,
     .lista-table td {
-        font-size: 12px; /* Reducir el tamaño de la fuente cuando el ancho de la pantalla es menor de 350px */
+        font-size: 12px;
+        /* Reducir el tamaño de la fuente cuando el ancho de la pantalla es menor de 350px */
     }
 }
