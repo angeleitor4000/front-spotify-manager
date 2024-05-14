@@ -14,6 +14,7 @@
 .lista-table th {
     background-color: #282828;
     color: white;
+    
 }
 
 .lista-table tbody tr:hover {
@@ -23,8 +24,40 @@
 .lista-table img {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    height: 50px;
+    max-height: 50px;
+    margin: 0;
 }
+
+
+.lista-table .checkbox-td {
+    text-align: center;
+}
+
+
+.lista-table input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+
+}
+
+.lista-table input[type="checkbox"]:checked {
+    background-color: #1DB954;
+    border-color: #1DB954;
+}
+
+.lista-table input[type="checkbox"]:hover {
+    background-color: #f0f0f0;
+}
+
+
 @media screen and (max-width: 768px) {
     .lista-table th:nth-child(2),
     .lista-table td:nth-child(2),

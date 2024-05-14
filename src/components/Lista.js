@@ -39,9 +39,9 @@ export default function Lista({ tracks }) {
                         <td>{track ? track.track.name : 'SIN NOMBRE'}</td>
                         <td>{track ? (!track.is_local ? track.track.album.name : 'Local'): "Local"}</td>
                         <td>{track ? track.track.artists[0].name : "Local"}</td>
-                        <td>{track ? track.added_at : ''}</td>
+                        <td>{track ? new Date(track.added_at).toLocaleDateString() : ''}</td>
                         <td>{track ? (formatDuration(track.track.duration_ms)) : ''}</td>
-                        <td>
+                        <td className="checkbox-td">    
                             <input type="checkbox" />
                         </td>
                     </tr>
