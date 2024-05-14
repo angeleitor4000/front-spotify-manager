@@ -64,7 +64,7 @@ function App() {
           element={<Home currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>}
         />
         <Route path="/playlistshome" element={<Misplaylists currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
-        <Route path="/verplaylist/:playlistid" element={<Verplaylist currentUser={currentUser} actualTrack={actualTrack} />} />
+        <Route path="/verplaylist/:playlistid" element={<Verplaylist currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
         <Route path="/pruebar" element={<PruebaRuta />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>

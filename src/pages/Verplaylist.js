@@ -1,22 +1,35 @@
 import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import Targeta from "../components/Targeta";
+//import Targeta from "../components/Targeta";
 import cargando from "../images/cargando.gif"
+import Table from "../components/Lista"
 
-export default function Verplaylist({ currentUser, actualTrack }) {
+export default function Verplaylist({ currentUser, actualTrack, playlists }) {
     const [loading, setLoading] = useState(true);
     const [tracks, setTracks] = useState([])
     const { playlistid } = useParams();
 
+    const getPlaylistTracks = useCallback(async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/getplaylisttracks/${playlistid}`);
+            const data = await response.json();
+            setTracks(data);
+            //console.log(data[30].track.album.images[0].url)
+        } catch (error) {
+            console.error("Error fetching user:", error);
+        }
+    }, [playlistid]);
+
     useEffect(() => {
-        getPlaylistTracks()
+        getPlaylistTracks();
+
         if (loading) {
             setLoading(false);
             refreshLogin();
         }
-    }, [loading]);
+    }, [loading, getPlaylistTracks]);
 
     async function refreshLogin() {
         try {
@@ -32,20 +45,19 @@ export default function Verplaylist({ currentUser, actualTrack }) {
     }
 
 
-    async function getPlaylistTracks() {
-        try {
-            const response = await fetch(`http://localhost:3000/getplaylisttracks/${playlistid}`);
-            const data = await response.json();
-            setTracks(data);
-            //console.log(data[30].track.album.images[0].url)
-        } catch (error) {
-            console.error("Error fetching user:", error);
-        }
-    }
+
 
     return (
         <div className="home-container">
-            <h1 className="home-title">¡TUS PLAYLISTS!</h1>
+            <h1 className="home-title">
+                Canciones en: &nbsp;
+                {playlists && playlists.items && playlists.items
+                    .filter(item => item.id === playlistid)
+                    .map((playlist, index) => {
+                        return playlist.name
+                    })}
+            </h1>
+
 
             <div className="container">
                 <div className="izquierda">
@@ -53,22 +65,14 @@ export default function Verplaylist({ currentUser, actualTrack }) {
                 </div>
 
                 <div className="cuerpo">
-                    {/*<p>Aqui va la lista de la playlist: {playlistid}</p>*/}
+                    {tracks.length <= 0 ? (<img src={cargando} alt="cargando" />
+                    ) : (
+                        <div className="table-container">
+                            <Table tracks={tracks} />
+                        </div>
+                    )}
 
-                    {tracks && tracks
-                        .filter(track => !track.is_local)
-                        .map((track, index) => {
-                            return <Targeta key={index}
-                                playlists = {track ? track.track.album.images[0].url : "URL_POR_DEFECTO"}
-                                titulo={track ? track.track.name : 'SIN NOMBRE'}
-                                descripcion=""
-                                botonTexto="VER"
-                                currentUser={currentUser}
-                                contexto= "libre"
-                            />;
-                        })}
 
-                    {tracks.length <= 0 && <img src={cargando} />}
                 </div>
 
                 <div className="derecha">
