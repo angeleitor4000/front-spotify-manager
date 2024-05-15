@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import "../styles/Lista.css";
 import { formatDuration } from "../utils/JavaScriptUtils";
 import defaultHola from "../images/NoImagePlaylist.png";
@@ -7,6 +8,7 @@ export default function Lista({ tracks }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [tracksPerPage, setTracksPerPage] = useState(10);
     const [selectedTracks, setSelectedTracks] = useState([]);
+    const { playlistid } = useParams();
 
     const totalTracks = tracks.length;
 
@@ -26,15 +28,39 @@ export default function Lista({ tracks }) {
             setCurrentPage(1);
         }
     }
-
-    function toggleTrackSelection(trackIndex) {
+    function toggleTrackSelection(trackIndex, uri) {
         const selectedIndex = selectedTracks.indexOf(trackIndex);
         if (selectedIndex === -1) {
-            setSelectedTracks([...selectedTracks, trackIndex]);
+            setSelectedTracks([...selectedTracks, { index: trackIndex, uri: uri }]);
         } else {
-            setSelectedTracks(selectedTracks.filter(index => index !== trackIndex));
+            setSelectedTracks(selectedTracks.filter(track => track.index !== trackIndex));
         }
     }
+
+    async function handleRemoveSelectedTracks() {
+        try {
+            const uris = selectedTracks.map(track => track.uri);
+            const response = await fetch(`http://localhost:3000/eliminarcancionesplaylist/${playlistid}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ tracks: uris })
+            });
+            if (response.ok) {
+                console.log("Canciones eliminadas con éxito.");
+                window.location.reload(); // Recargar la página si la respuesta es exitosa
+            } else {
+                console.error('Error al eliminar canciones:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error al eliminar canciones:', error);
+        }
+    }
+    
+
+
+
 
     return (
         <div>
@@ -44,12 +70,12 @@ export default function Lista({ tracks }) {
                 <p>Página: {currentPage} de {Math.ceil(totalTracks / tracksPerPage)}</p>
             </div>
 
-
             <div className="button-container">
                 <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>Primera Página</button>
                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Anterior</button>
                 <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentTracks.length < tracksPerPage}>Siguiente</button>
                 <button onClick={() => setCurrentPage(Math.ceil(totalTracks / tracksPerPage))} disabled={currentTracks.length < tracksPerPage}>Última Página</button>
+                <button onClick={handleRemoveSelectedTracks} disabled={selectedTracks.length === 0}>Eliminar Seleccionados</button>
             </div>
 
             <table className="lista-table">
@@ -92,15 +118,15 @@ export default function Lista({ tracks }) {
                             <td className="checkbox-td">
                                 <input
                                     type="checkbox"
-                                    checked={selectedTracks.includes(index + indexOfFirstTrack)}
-                                    onChange={() => toggleTrackSelection(index + indexOfFirstTrack)}
+                                    checked={selectedTracks.some(track => track.index === index + indexOfFirstTrack)}
+                                    onChange={() => toggleTrackSelection(index + indexOfFirstTrack, track.track.uri)}
                                 />
+
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
         </div>
     );
 }
