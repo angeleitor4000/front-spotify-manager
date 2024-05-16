@@ -49,6 +49,8 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
 
     return (
         <div className="home-container">
+
+
             <h1 className="home-title">
                 Canciones en: &nbsp;
                 {playlists && playlists.items && playlists.items
@@ -57,6 +59,11 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
                         return playlist.name
                     })}
             </h1>
+
+            <a href="/playlistshome">
+                <button>VOLVER</button>
+            </a>
+
 
 
             <div className="container">
@@ -68,7 +75,7 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
                     {tracks.length <= 0 ? (<img src={cargando} alt="cargando" />
                     ) : (
                         <div className="table-container">
-                            <Table tracks={tracks} />
+                            <Table tracks={tracks} playlists={playlists} />
                         </div>
                     )}
 
@@ -80,9 +87,6 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
                 </div>
             </div>
 
-            <a href="/playlistshome" style={{ marginTop: "50px", marginBottom: "50px" }}>
-                <button>VOLVER</button>
-            </a>
 
         </div>
     );

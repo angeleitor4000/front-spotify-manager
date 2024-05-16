@@ -110,14 +110,44 @@ input[type="text"] {
     cursor: pointer;
 }
 
+
+.button-container .buttonRed{
+    background-color: #d62323;
+    border-radius: 50px;
+
+}
+
+.button-container .buttonBlue{
+    background-color: #23acd6;
+    margin-left: 20px;
+    border-radius: 50px;
+
+}
+
 .button-container button:hover {
     background-color: #1aa34a;
 }
+
+.button-container .buttonRed:hover {
+    background-color: #be1717;
+}
+
+.button-container .buttonBlue:hover {
+    background-color: #1e95b9;
+}
+
 
 .button-container button:disabled {
     background-color: #a3a3a3;
     cursor: not-allowed;
 }
+
+.button-container .buttonBlue:disabled  {
+    background-color: #a3a3a3;
+    cursor: not-allowed;
+    margin-left: 20px;
+}
+
 
 
 
@@ -163,7 +193,6 @@ input[type="text"] {
     .lista-table th:nth-child(7),
     .lista-table td:nth-child(7) {
         display: none;
-        /* Oculta la columna de fecha añadida y duración en pantallas pequeñas */
     }
 
     .lista-table th,
@@ -175,7 +204,6 @@ input[type="text"] {
         height: 40px;
     }
 
-    /* Reduzca el tamaño de los botones de navegación */
     .button-container button {
         padding: 8px 18px;
         margin-bottom: 10px;
@@ -188,6 +216,5 @@ input[type="text"] {
     .lista-table th,
     .lista-table td {
         font-size: 12px;
-        /* Reducir el tamaño de la fuente cuando el ancho de la pantalla es menor de 350px */
     }
 }

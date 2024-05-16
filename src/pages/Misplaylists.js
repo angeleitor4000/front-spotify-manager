@@ -30,6 +30,10 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
     return (
         <div className="home-container">
             <h1 className="home-title">¡TUS PLAYLISTS!</h1>
+            <a href="/home">
+                <button>VOLVER</button>
+            </a>
+
 
             <div className="container">
                 <div className="izquierda">
@@ -58,10 +62,6 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
                     <Escuchando actualTrack={actualTrack} />
                 </div>
             </div>
-
-            <a href="/home">
-                <button style={{ marginTop: "50px", marginBottom: "50px" }}>VOLVER</button>
-            </a>
 
         </div>
     );

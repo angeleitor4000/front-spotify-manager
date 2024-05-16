@@ -32,6 +32,11 @@ export default function Home({ currentUser, actualTrack, playlists }) {
     <div className="home-container">
       <h1 className="home-title">¡BIENVENIDO!</h1>
 
+      <a href="/">
+        <button>SALIR</button>
+      </a>
+
+
       <div className="container">
         <div className="izquierda">
           <Hola currentUser={currentUser} />
@@ -55,10 +60,6 @@ export default function Home({ currentUser, actualTrack, playlists }) {
           <Escuchando actualTrack={actualTrack} />
         </div>
       </div>
-
-      <a href="/">
-        <button style={{ marginTop: "50px", marginBottom: "50px" }}>VOLVER</button>
-      </a>
 
     </div>
   );
