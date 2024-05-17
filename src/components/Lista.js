@@ -3,17 +3,18 @@ import { useParams } from "react-router-dom";
 import "../styles/Lista.css";
 import { formatDuration } from "../utils/JavaScriptUtils";
 import defaultHola from "../images/NoImagePlaylist.png";
+import ModalPlaylistNew from './ModalPlaylistNew';
 
 export default function Lista({ tracks, playlists }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [tracksPerPage, setTracksPerPage] = useState(10);
     const [selectedTracks, setSelectedTracks] = useState([]);
-    const [selectedPlaylists, setSelectedPlaylists] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [newPlaylistName, setNewPlaylistName] = useState("");
     const { playlistid } = useParams();
 
     const totalTracks = tracks.length;
 
-    // Actualizar el estado de las pistas seleccionadas cuando cambian las pistas
     useEffect(() => {
         setSelectedTracks([]);
     }, [tracks]);
@@ -35,7 +36,7 @@ export default function Lista({ tracks, playlists }) {
         if (isSelected) {
             setSelectedTracks(selectedTracks.filter(track => track.index !== trackIndex));
         } else {
-            setSelectedTracks([...selectedTracks, { index: trackIndex, uri: uri }]);
+            setSelectedTracks([...selectedTracks, { index: trackIndex, uri }]);
         }
     }
 
@@ -51,7 +52,7 @@ export default function Lista({ tracks, playlists }) {
             });
             if (response.ok) {
                 console.log("Canciones eliminadas con éxito.");
-                window.location.reload(); // Recargar la página si la respuesta es exitosa
+                window.location.reload();
             } else {
                 console.error('Error al eliminar canciones:', response.statusText);
             }
@@ -59,12 +60,11 @@ export default function Lista({ tracks, playlists }) {
             console.error('Error al eliminar canciones:', error);
         }
     }
-    
+
     async function handleAddSelectedTracksToNew() {
         try {
             const uris = selectedTracks.map(track => track.uri);
-            /*
-            const response = await fetch(`http://localhost:3000/eliminarcancionesplaylist/${playlistid}`, {
+            const response = await fetch(`http://localhost:3000/addtrackstonewplaylists/${newPlaylistName}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -72,40 +72,24 @@ export default function Lista({ tracks, playlists }) {
                 body: JSON.stringify({ tracks: uris })
             });
             if (response.ok) {
-                console.log("Canciones eliminadas con éxito.");
-                window.location.reload(); // Recargar la página si la respuesta es exitosa
+                console.log("Canciones añadidas con éxito.");
+                window.location.reload();
             } else {
-                console.error('Error al eliminar canciones:', response.statusText);
+                console.error('Error al añadir canciones:', response.statusText);
             }
-            */
         } catch (error) {
-            console.error('Error al eliminar canciones:', error);
+            console.error('Error al añadir canciones:', error);
         }
     }
 
     async function handleAddSelectedTracksToExist() {
         try {
             const uris = selectedTracks.map(track => track.uri);
-            /*
-            const response = await fetch(`http://localhost:3000/eliminarcancionesplaylist/${playlistid}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ tracks: uris })
-            });
-            if (response.ok) {
-                console.log("Canciones eliminadas con éxito.");
-                window.location.reload(); // Recargar la página si la respuesta es exitosa
-            } else {
-                console.error('Error al eliminar canciones:', response.statusText);
-            }
-            */
+            // Aquí iría la lógica para añadir canciones a una playlist existente
         } catch (error) {
-            console.error('Error al eliminar canciones:', error);
+            console.error('Error al añadir canciones:', error);
         }
     }
-
 
     return (
         <div>
@@ -115,7 +99,6 @@ export default function Lista({ tracks, playlists }) {
                 <p>Página: {currentPage} de {Math.ceil(totalTracks / tracksPerPage)}</p>
             </div>
 
-
             <div className="button-container">
                 <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>Primera Página</button>
                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Anterior</button>
@@ -123,10 +106,9 @@ export default function Lista({ tracks, playlists }) {
                 <button onClick={() => setCurrentPage(Math.ceil(totalTracks / tracksPerPage))} disabled={currentTracks.length < tracksPerPage}>Última Página</button>
             </div>
 
-
             <div className='button-container'>
                 <button onClick={handleRemoveSelectedTracks} disabled={selectedTracks.length === 0} className={'buttonRed'}>Eliminar Seleccionados</button>
-                <button onClick={handleAddSelectedTracksToNew} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a nueva playlist</button>
+                <button onClick={() => setShowModal(true)} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a nueva playlist</button>
                 <button onClick={handleAddSelectedTracksToExist} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a otra playlist</button>
             </div>
 
@@ -176,6 +158,15 @@ export default function Lista({ tracks, playlists }) {
                     ))}
                 </tbody>
             </table>
+            <ModalPlaylistNew
+                showModal={showModal}
+                setShowModal={setShowModal}
+                handleAddSelectedTracksToNew={handleAddSelectedTracksToNew}
+                setNewPlaylistName={setNewPlaylistName}
+            />
+
+
+
         </div>
     );
 }
