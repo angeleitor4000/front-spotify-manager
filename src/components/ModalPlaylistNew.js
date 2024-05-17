@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNew, setNewPlaylistName }) {
+function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNew }) {
     const [newPlaylistNameInput, setNewPlaylistNameInput] = useState("");
 
     const handleInputChange = (event) => {
@@ -8,9 +8,9 @@ function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNe
     };
 
     const handleCreatePlaylist = () => {
-        setNewPlaylistName(newPlaylistNameInput);
+        handleAddSelectedTracksToNew(newPlaylistNameInput); // Pasar el nombre de la nueva playlist al método handleAddSelectedTracksToNew
         setShowModal(false);
-        handleAddSelectedTracksToNew();
+        setNewPlaylistNameInput(""); // Limpiar el input al cerrar el modal
     };
 
     const handleCloseModal = () => {

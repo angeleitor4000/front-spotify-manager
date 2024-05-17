@@ -1,0 +1,30 @@
+.modal{
+    padding: 200px 0;
+    
+}
+
+.modal-content{
+    padding-bottom: 100px;
+}
+
+.modal input[type="checkbox"].checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.modal input[type="checkbox"].checkbox:checked {
+    background-color: #1DB954;
+    border-color: #1DB954;
+}
+
+.modal input[type="checkbox"].checkbox:hover {
+    background-color: #f0f0f0;
+}

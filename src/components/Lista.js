@@ -4,14 +4,19 @@ import "../styles/Lista.css";
 import { formatDuration } from "../utils/JavaScriptUtils";
 import defaultHola from "../images/NoImagePlaylist.png";
 import ModalPlaylistNew from './ModalPlaylistNew';
+import ModalPlaylistExisting from './ModalPlaylistExisting';
 
 export default function Lista({ tracks, playlists }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [tracksPerPage, setTracksPerPage] = useState(10);
     const [selectedTracks, setSelectedTracks] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [showNewModal, setShowNewModal] = useState(false);
+    const [showExistingModal, setShowExistingModal] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState("");
     const { playlistid } = useParams();
+    
+    /*Eliminar warning*/
+    console.log(newPlaylistName)
 
     const totalTracks = tracks.length;
 
@@ -60,8 +65,8 @@ export default function Lista({ tracks, playlists }) {
             console.error('Error al eliminar canciones:', error);
         }
     }
-
-    async function handleAddSelectedTracksToNew() {
+    
+    async function handleAddSelectedTracksToNew(newPlaylistName) {
         try {
             const uris = selectedTracks.map(track => track.uri);
             const response = await fetch(`http://localhost:3000/addtrackstonewplaylists/${newPlaylistName}`, {
@@ -81,11 +86,24 @@ export default function Lista({ tracks, playlists }) {
             console.error('Error al añadir canciones:', error);
         }
     }
+    
 
-    async function handleAddSelectedTracksToExist() {
+    async function handleAddSelectedTracksToExist(selectedPlaylistsIds) {
         try {
             const uris = selectedTracks.map(track => track.uri);
-            // Aquí iría la lógica para añadir canciones a una playlist existente
+            const response = await fetch(`http://localhost:3000/addtrackstoexistplaylists`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ tracks: uris, selectedPlaylists: selectedPlaylistsIds })
+            });
+            if (response.ok) {
+                console.log("Canciones añadidas con éxito.");
+                window.location.reload();
+            } else {
+                console.error('Error al añadir canciones:', response.statusText);
+            }
         } catch (error) {
             console.error('Error al añadir canciones:', error);
         }
@@ -108,8 +126,8 @@ export default function Lista({ tracks, playlists }) {
 
             <div className='button-container'>
                 <button onClick={handleRemoveSelectedTracks} disabled={selectedTracks.length === 0} className={'buttonRed'}>Eliminar Seleccionados</button>
-                <button onClick={() => setShowModal(true)} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a nueva playlist</button>
-                <button onClick={handleAddSelectedTracksToExist} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a otra playlist</button>
+                <button onClick={() => setShowNewModal(true)} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a nueva playlist</button>
+                <button onClick={() => setShowExistingModal(true)} disabled={selectedTracks.length === 0} className={'buttonBlue'}>Añadir a playlists existentes</button>
             </div>
 
             <table className="lista-table">
@@ -159,14 +177,17 @@ export default function Lista({ tracks, playlists }) {
                 </tbody>
             </table>
             <ModalPlaylistNew
-                showModal={showModal}
-                setShowModal={setShowModal}
+                showModal={showNewModal}
+                setShowModal={setShowNewModal}
                 handleAddSelectedTracksToNew={handleAddSelectedTracksToNew}
                 setNewPlaylistName={setNewPlaylistName}
             />
-
-
-
+            <ModalPlaylistExisting
+                showModal={showExistingModal}
+                setShowModal={setShowExistingModal}
+                playlists={playlists}
+                handleAddSelectedTracksToExist={handleAddSelectedTracksToExist}
+            />
         </div>
     );
 }
