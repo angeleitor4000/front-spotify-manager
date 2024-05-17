@@ -31,8 +31,8 @@ function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNe
                             onChange={handleInputChange}
                         />
                         <div className="button-container-modal">
-                            <button onClick={handleCreatePlaylist} className='buttonBlue'>Crear Playlist</button>
                             <button onClick={handleCloseModal} className='buttonRed'>Cancelar</button>
+                            <button onClick={handleCreatePlaylist} className='buttonBlue'>Crear Playlist</button>
                         </div>
                     </div>
                 </div>

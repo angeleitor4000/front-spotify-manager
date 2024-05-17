@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../styles/ModalTablaAdd.css"
 
-export default function ModalPlaylistExisting({ showModal, setShowModal, playlists, handleAddSelectedTracksToExist }) {
+export default function ModalPlaylistExisting({ currentUser, showModal, setShowModal, playlists, handleAddSelectedTracksToExist }) {
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
 
     function togglePlaylistSelection(playlistId) {
@@ -34,7 +34,9 @@ export default function ModalPlaylistExisting({ showModal, setShowModal, playlis
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {playlists.items.map(playlist => (
+                                    {playlists.items
+                                    .filter(item => item.owner.display_name === currentUser.display_name)
+                                    .map(playlist => (
                                         <tr key={playlist.id}>
                                             <td>{playlist.name}</td>
                                             <td>
@@ -42,7 +44,7 @@ export default function ModalPlaylistExisting({ showModal, setShowModal, playlis
                                                     type="checkbox"
                                                     checked={selectedPlaylists.includes(playlist.id)}
                                                     onChange={() => togglePlaylistSelection(playlist.id)}
-                                                    className="checkbox" 
+                                                    className="checkbox"
                                                 />
                                             </td>
                                         </tr>
@@ -51,8 +53,8 @@ export default function ModalPlaylistExisting({ showModal, setShowModal, playlis
                             </table>
                         </div>
                         <div className="button-container-modal">
-                            <button onClick={handleAddTracksToSelectedPlaylists} className='buttonBlue'>Añadir</button>
                             <button onClick={() => setShowModal(false)} className='buttonRed'>Cancelar</button>
+                            <button onClick={handleAddTracksToSelectedPlaylists} className='buttonBlue'>Añadir</button>
                         </div>
                     </div>
                 </div>

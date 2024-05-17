@@ -6,7 +6,7 @@ import defaultHola from "../images/NoImagePlaylist.png";
 import ModalPlaylistNew from './ModalPlaylistNew';
 import ModalPlaylistExisting from './ModalPlaylistExisting';
 
-export default function Lista({ tracks, playlists }) {
+export default function Lista({ tracks, playlists, currentUser }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [tracksPerPage, setTracksPerPage] = useState(10);
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -187,6 +187,7 @@ export default function Lista({ tracks, playlists }) {
                 setShowModal={setShowExistingModal}
                 playlists={playlists}
                 handleAddSelectedTracksToExist={handleAddSelectedTracksToExist}
+                currentUser={currentUser}
             />
         </div>
     );

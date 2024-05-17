@@ -75,7 +75,7 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
                     {tracks.length <= 0 ? (<img src={cargando} alt="cargando" />
                     ) : (
                         <div className="table-container">
-                            <Table tracks={tracks} playlists={playlists} />
+                            <Table tracks={tracks} playlists={playlists} currentUser={currentUser}/>
                         </div>
                     )}
 

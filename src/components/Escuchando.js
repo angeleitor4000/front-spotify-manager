@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/HolaEscuchandoEstilo.css";
+import noaudio from "../images/noaudio.png"
 
 export default function Escuchando(props) {
     const { actualTrack } = props;
@@ -14,10 +15,11 @@ export default function Escuchando(props) {
             )))}
             
             {actualTrack.item && !actualTrack.item.is_local && (
-                <img src={actualTrack.item.album.images[0].url} alt="" className="imagen-escuchando"></img>
+                <img src={actualTrack.item.album.images[0].url} alt="" className="imagen-escuchando"/>
             )}
             {actualTrack.item && ((actualTrack.item.is_local && <p>Cancion local: No se puede recuperar datos</p>))}
             {!actualTrack.item && <p>Actualmente no estas escuchando nada</p>}
+            {!actualTrack.item && <img src={noaudio} alt="" className="imagen-escuchando"/>}
         </div>
     );
 }
