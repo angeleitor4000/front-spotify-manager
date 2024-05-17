@@ -49,7 +49,7 @@ function App() {
       const response = await fetch("http://localhost:3000/getplaylists");
       const data = await response.json();
       setPlaylists(data);
-      console.log(data.items[0].images[0].url)
+      //console.log(data.items[0].images[0].url)
     } catch (error) {
       console.error("Error fetching user:", error);
     }

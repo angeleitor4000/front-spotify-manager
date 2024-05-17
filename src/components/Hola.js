@@ -12,6 +12,8 @@ export default function Hola(props) {
             {currentUser && currentUser.images && (
                 <img src={currentUser.images[1].url} alt="" className="imagen-hola"></img>
             )}
+
+            {currentUser && !currentUser.images && 'sin imagen'}
             
         </div>
     );

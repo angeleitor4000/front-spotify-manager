@@ -45,7 +45,7 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
                         .filter(item => item.owner.display_name === currentUser.display_name)
                         .map((playlist, index) => {
                             return <Targeta key={index}
-                            playlists={playlist ? playlist.images[0].url : 'URL_POR_DEFECTO'}
+                            playlists={playlist && playlist.images[0].url ? (playlist.images[0].url) : 'URL_POR_DEFECTO'}
                             titulo={playlist ? playlist.name : 'SIN NOMBRE'}
                             descripcion={playlist ? playlist.description : ''}
                             botonTexto="VER"
