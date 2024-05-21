@@ -6,15 +6,18 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "serve": "^14.2.3",
+    "spotify-web-api-node": "^5.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"node ./server/app.js\"",
     "build": "react-scripts build && echo '/* /index.html  200'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -36,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
