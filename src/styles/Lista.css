@@ -151,6 +151,13 @@ input[type="text"] {
     cursor: not-allowed;
 }
 
+.button-container .buttonRed:disabled {
+    background-color: #a3a3a3;
+    cursor: not-allowed;
+}
+
+
+
 .button-container .buttonBlue:disabled {
     background-color: #a3a3a3;
     cursor: not-allowed;
@@ -250,7 +257,7 @@ input[type="text"] {
     /* Fondo con transparencia */
 }
 
-.modal {
+.modal, .modal-exist {
     display: block;
     /* Mostrar el modal */
     position: fixed;
@@ -270,6 +277,7 @@ input[type="text"] {
     justify-content: center;
     align-items: center;
     display: flex;
+    padding: 0;
 }
 
 .modal-content {

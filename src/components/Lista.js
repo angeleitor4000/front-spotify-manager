@@ -15,6 +15,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
     const [showExistingModal, setShowExistingModal] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Nuevo estado para el modal de confirmación
     const { playlistid } = useParams();
 
     // Eliminar warning
@@ -73,8 +74,10 @@ export default function Lista({ tracks, playlists, currentUser }) {
         }
     }
 
-
     async function handleRemoveSelectedTracks() {
+        // Oculta el modal de confirmación
+        setShowConfirmationModal(false);
+
         try {
             const response = await fetch(`http://localhost:3000/eliminarcancionesplaylist/${playlistid}`, {
                 method: 'DELETE',
@@ -93,6 +96,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
             console.error('Error al eliminar canciones:', error);
         }
     }
+
 
     async function handleAddSelectedTracksToNew(newPlaylistName) {
         try {
@@ -136,6 +140,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
 
     return (
         <div>
+
             <div className="page-controls">
                 <label htmlFor='elementosxpagina'>Selecciona pistas por página: </label>
                 <input type='text' id='elementosxpagina' placeholder={tracksPerPage} onChange={handleChangePagesSize} />
@@ -151,12 +156,12 @@ export default function Lista({ tracks, playlists, currentUser }) {
             </div>
 
             <div className='button-container'>
-                <button onClick={handleRemoveSelectedTracks} disabled={selectedTracks.size === 0} className={'buttonRed'}>Eliminar Seleccionados</button>
+                {/* Abre el modal de confirmación al hacer clic */}
+                <button onClick={() => setShowConfirmationModal(true)} disabled={selectedTracks.size === 0} className={'buttonRed'}>Eliminar Seleccionados</button>
                 <button onClick={() => setShowNewModal(true)} disabled={selectedTracks.size === 0} className={'buttonBlue'}>Añadir a nueva playlist</button>
                 <button onClick={() => setShowExistingModal(true)} disabled={selectedTracks.size === 0} className={'buttonBlue'}>Añadir a playlists existentes</button>
                 <button onClick={handleSelectAll} disabled={currentTracks.length === 0} className={'buttonGreen'}>Seleccionar Todo</button>
             </div>
-
 
             <table className="lista-table">
                 <thead>
@@ -193,7 +198,19 @@ export default function Lista({ tracks, playlists, currentUser }) {
                 handleAddSelectedTracksToExist={handleAddSelectedTracksToExist}
                 currentUser={currentUser}
             />
+
+            {showConfirmationModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>¿Estás seguro de que quieres eliminar las canciones seleccionadas?</h2>
+                        <div className="button-container-modal">
+                            <button onClick={() => setShowConfirmationModal(false)}>Cancelar</button>
+                            <button onClick={handleRemoveSelectedTracks} className='buttonRed'>Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
-

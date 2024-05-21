@@ -1,13 +1,13 @@
-.modal{
+.modal-exist{
     padding: 200px 0;
-    
 }
 
 .modal-content{
     padding-bottom: 100px;
 }
 
-.modal input[type="checkbox"].checkbox {
+
+.modal-exist input[type="checkbox"].checkbox {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -20,11 +20,40 @@
     vertical-align: middle;
 }
 
-.modal input[type="checkbox"].checkbox:checked {
+.modal-exist input[type="checkbox"].checkbox:checked {
     background-color: #1DB954;
     border-color: #1DB954;
 }
 
-.modal input[type="checkbox"].checkbox:hover {
+
+.modal-exist input[type="checkbox"].checkbox:hover {
     background-color: #f0f0f0;
+}
+
+.modal-exist table {
+    width: 100%;
+}
+
+.button-container button {
+    background-color: #1DB954;
+    color: black;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    border: none;
+    font-family: "circular_semibold";
+    text-align: center;
+    cursor: pointer;
+}
+
+.buttonRed {
+    background-color: #d62323;
+    border-radius: 50px;
+
+}
+.buttonBlue {
+    background-color: #23acd6;
+    margin-left: 20px;
+    border-radius: 50px;
+
 }

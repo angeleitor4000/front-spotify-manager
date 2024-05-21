@@ -21,7 +21,7 @@ export default function ModalPlaylistExisting({ currentUser, showModal, setShowM
     return (
         <>
             {showModal && (
-                <div className="modal">
+                <div className="modal-exist">
                     <div className="modal-content">
                         <span className="close" onClick={() => setShowModal(false)}>&times;</span>
                         <h2>Selecciona las playlists a las que deseas añadir las canciones:</h2>
@@ -29,26 +29,27 @@ export default function ModalPlaylistExisting({ currentUser, showModal, setShowM
                             <table>
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Nombre</th>
-                                        <th>Añadir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {playlists.items
-                                    .filter(item => item.owner.display_name === currentUser.display_name)
-                                    .map(playlist => (
-                                        <tr key={playlist.id}>
-                                            <td>{playlist.name}</td>
-                                            <td>
-                                                <input
-                                                    type="checkbox"
-                                                    checked={selectedPlaylists.includes(playlist.id)}
-                                                    onChange={() => togglePlaylistSelection(playlist.id)}
-                                                    className="checkbox"
-                                                />
-                                            </td>
-                                        </tr>
-                                    ))}
+                                        .filter(item => item.owner.display_name === currentUser.display_name)
+                                        .map(playlist => (
+                                            <tr key={playlist.id}>
+                                                <td className='checkbox-container'>
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={selectedPlaylists.includes(playlist.id)}
+                                                        onChange={() => togglePlaylistSelection(playlist.id)}
+                                                        className="checkbox"
+                                                    />
+                                                </td>
+                                                <td>{playlist.name}</td>
+
+                                            </tr>
+                                        ))}
                                 </tbody>
                             </table>
                         </div>
