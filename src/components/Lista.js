@@ -5,6 +5,7 @@ import { formatDuration } from "../utils/JavaScriptUtils";
 import defaultHola from "../images/NoImagePlaylist.png";
 import ModalPlaylistNew from './ModalPlaylistNew';
 import ModalPlaylistExisting from './ModalPlaylistExisting';
+import CuerpoTabla from './CuerpoTabla';
 
 export default function Lista({ tracks, playlists, currentUser }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -71,7 +72,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
             setSelectedTracks(updatedSelectedTracks);
         }
     }
-    
+
 
     async function handleRemoveSelectedTracks() {
         try {
@@ -92,7 +93,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
             console.error('Error al eliminar canciones:', error);
         }
     }
-    
+
     async function handleAddSelectedTracksToNew(newPlaylistName) {
         try {
             const response = await fetch(`http://localhost:3000/addtrackstonewplaylists/${newPlaylistName}`, {
@@ -112,7 +113,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
             console.error('Error al añadir canciones:', error);
         }
     }
-    
+
     async function handleAddSelectedTracksToExist(selectedPlaylistsIds) {
         try {
             const response = await fetch(`http://localhost:3000/addtrackstoexistplaylists`, {
@@ -139,7 +140,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
                 <label htmlFor='elementosxpagina'>Selecciona pistas por página: </label>
                 <input type='text' id='elementosxpagina' placeholder={tracksPerPage} onChange={handleChangePagesSize} />
                 <p>Página: {currentPage} de {Math.ceil(totalTracks / tracksPerPage)}</p>
-                <input type='text' id='buscadorcanciones' placeholder={"Buscar cancion..."} onChange={handleSearchInputChange} className='buscador'/>
+                <input type='text' id='buscadorcanciones' placeholder={"Buscar cancion..."} onChange={handleSearchInputChange} className='buscador' />
             </div>
 
             <div className="button-container">
@@ -170,38 +171,14 @@ export default function Lista({ tracks, playlists, currentUser }) {
                         <th>Seleccionar</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {currentTracks.map((track, index) => (
-                        <tr key={index}>
-                            <td>{index + indexOfFirstTrack + 1}</td>
-                            <td>
-                                <img
-                                    src={
-                                        track && track.track.album.images.length > 0
-                                            ? track.track.album.images[0].url
-                                            : defaultHola
-                                    }
-                                    alt={
-                                        track && track.track.name ? track.track.name : 'SIN NOMBRE'
-                                    }
-                                    style={{ height: "50px" }}
-                                />
-                            </td>
-                            <td>{track ? track.track.name : 'SIN NOMBRE'}</td>
-                            <td>{track ? (!track.is_local ? track.track.album.name : 'Local') : "Local"}</td>
-                            <td>{track ? track.track.artists[0].name : "Local"}</td>
-                            <td>{track ? new Date(track.added_at).toLocaleDateString() : ''}</td>
-                            <td>{track ? (formatDuration(track.track.duration_ms)) : ''}</td>
-                            <td className="checkbox-td">
-                                <input
-                                    type="checkbox"
-                                    checked={selectedTracks.has(track.track.uri)}
-                                    onChange={() => toggleTrackSelection(track.track.uri)}
-                                />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
+                <CuerpoTabla
+                    currentTracks={currentTracks}
+                    indexOfFirstTrack={indexOfFirstTrack}
+                    selectedTracks={selectedTracks}
+                    toggleTrackSelection={toggleTrackSelection}
+                    formatDuration={formatDuration}
+                    defaultHola={defaultHola}
+                />
             </table>
             <ModalPlaylistNew
                 showModal={showNewModal}
