@@ -11,7 +11,7 @@ export default function Targeta({ playlists, currentUser, titulo, descripcion, b
         ? playlists.items
             .filter(item => item.owner.display_name === currentUser.display_name) // Filtrar las playlists del usuario actual
             .slice(0, 4)
-            .map(item => item.images[0].url)
+            .map(item => item.images[0].url ? item.images[0].url : noImagePlaylist)
         : [];
     }
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
 import Targeta from "../components/Targeta";
+import noImagePlaylist from '../images/NoImagePlaylist.png'; // Ruta de la imagen de stock
+
 
 export default function Misplaylists({ currentUser, actualTrack, playlists }) {
     const [loading, setLoading] = useState(true);
@@ -42,10 +44,13 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
 
                 <div className="cuerpo">
                     {playlists && playlists.items && playlists.items
-                        .filter(item => item.owner.display_name === currentUser.display_name)
+                        .filter(item => 
+                            item.owner.display_name === currentUser.display_name && 
+                            item.tracks.total !== 0
+                        )
                         .map((playlist, index) => {
                             return <Targeta key={index}
-                            playlists={playlist && playlist.images[0].url ? (playlist.images[0].url) : 'URL_POR_DEFECTO'}
+                            playlists={playlist && playlist.images ? (playlist.images[0].url) : {noImagePlaylist}}
                             titulo={playlist ? playlist.name : 'SIN NOMBRE'}
                             descripcion={playlist ? playlist.description : ''}
                             botonTexto="VER"
