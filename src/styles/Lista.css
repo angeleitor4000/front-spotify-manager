@@ -90,6 +90,9 @@ input[type="text"] {
     color: black;
 }
 
+.buscador{
+    margin-left: auto;
+}
 
 .button-container {
     margin-top: 20px;
@@ -101,9 +104,9 @@ input[type="text"] {
 .button-container button {
     background-color: #1DB954;
     color: black;
-    padding: 15px 30px;
+    padding: 10px 30px;
     border-radius: 30px;
-    font-size: 20px;
+    font-size: 16px;
     border: none;
     font-family: "circular_semibold";
     text-align: center;
@@ -117,11 +120,17 @@ input[type="text"] {
 
 }
 
+
 .button-container .buttonBlue {
     background-color: #23acd6;
     margin-left: 20px;
     border-radius: 50px;
 
+}
+
+.button-container .buttonGreen {
+    border-radius: 50px;
+    margin-left: 20px;
 }
 
 .button-container button:hover {

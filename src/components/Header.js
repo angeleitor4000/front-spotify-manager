@@ -27,7 +27,7 @@ export default function Header() {
                             <>
                                 <a href='/'><img src={logo} alt="logo" className="logo" /></a>
                                 <div className="title">
-                                    <a href='/'><h1>SPOTIFY MANAGER</h1></a>
+                                    <a href='/home'><h1>SPOTIFY MANAGER</h1></a>
                                 </div>
                                 {/* Este espacio vacío ayudará a empujar el título al centro */}
                                 <div className="space"></div>
