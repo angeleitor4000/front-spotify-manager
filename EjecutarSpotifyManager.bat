@@ -1,7 +1,6 @@
 @echo off
 title Ejecutar Spotify Manager
 
-cd /d "%~dp0front-spotify-manager"
 git pull
 call install.bat
 
