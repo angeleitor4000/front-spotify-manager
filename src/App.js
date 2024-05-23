@@ -16,7 +16,7 @@ function App() {
   const [actualTrack, setActualTrack] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
-  //Obtiene
+  //Ejecuta los metodos al renderizar la pagina.
   useEffect(() => {
     getCurrentUser();
     getPlaylists()
@@ -27,6 +27,7 @@ function App() {
     };
   }, []);
 
+  //Obtiene usario logeado
   async function getCurrentUser() {
     try {
       const response = await fetch("http://localhost:3000/user");
@@ -37,6 +38,7 @@ function App() {
     }
   }
 
+  //Cancion escuchando actualmente
   async function getActualTrack() {
     try {
       const response = await fetch("http://localhost:3000/getactualtrack");
@@ -47,17 +49,18 @@ function App() {
     }
   }
 
+  //Obtiene las playlists del usuario.
   async function getPlaylists() {
     try {
       const response = await fetch("http://localhost:3000/getplaylists");
       const data = await response.json();
       setPlaylists(data);
-      //console.log(data.items[0].images[0].url)
     } catch (error) {
       console.error("Error fetching user:", error);
     }
   }
 
+  //Devuelve una pagina segun la ruta.
   return (
     <BrowserRouter>
       <Routes>
@@ -69,7 +72,7 @@ function App() {
         <Route path="/playlistshome" element={<Misplaylists currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
         <Route path="/verplaylist/:playlistid" element={<Verplaylist currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
         <Route path="/pruebar" element={<PruebaRuta />} />
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/*" element={<Home currentUser={currentUser} actualTrack={actualTrack} playlists={playlists}/>} />
       </Routes>
     </BrowserRouter>
   );

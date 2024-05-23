@@ -18,7 +18,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Nuevo estado para el modal de confirmación
     const { playlistid } = useParams();
 
-    // Eliminar warning
+    // Eliminar warning en la consola
     console.log(newPlaylistName)
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
 
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value.toLowerCase());
-        setCurrentPage(1); // Reset to first page on new search
+        setCurrentPage(1); 
     };
 
     const filteredTracks = tracks.filter(track => {

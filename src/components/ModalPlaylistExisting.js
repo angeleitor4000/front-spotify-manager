@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import "../styles/ModalTablaAdd.css"
 
 export default function ModalPlaylistExisting({ currentUser, showModal, setShowModal, playlists, handleAddSelectedTracksToExist }) {
+
+    //Importante recibir los metodos como props para poder ser utilizados en el modal.
+
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
 
     function togglePlaylistSelection(playlistId) {

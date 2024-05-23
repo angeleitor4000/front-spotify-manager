@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/HeaderStyle.css';
+
+//Logo sujeto a cambio por uno personalizado
 import logo from "../images/slogo.png";
 
 export default function Header() {
@@ -19,7 +21,7 @@ export default function Header() {
 
     return (
         <>
-
+            {/*Diseño dinamico segun resolucion*/}
             {headerWidth >= 600 ? (
                 <div className='super-header-container'>
                     <div className="header-container">

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function LandingPage() {
 
-    //Los estilos estan en local y no en un css aparte para probar
+    //Los estilos estan en local y no en un css separado para probar
     //la implementacion de estilos declarativos en react
 
     const landingPageStyle = {

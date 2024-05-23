@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
 function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNew }) {
+
+    //Importante recibir los metodos como props para poder ser utilizados en el modal.
+
     const [newPlaylistNameInput, setNewPlaylistNameInput] = useState("");
 
     const handleInputChange = (event) => {

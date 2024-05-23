@@ -6,6 +6,9 @@ import noImagePlaylist from '../images/NoImagePlaylist.png'; // Ruta de la image
 
 
 export default function Misplaylists({ currentUser, actualTrack, playlists }) {
+
+    //La logica de los metodos refresh login se encuentra en todas las pagina para 
+    //asegurarse de que hay un usuario autenticado
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -42,23 +45,24 @@ export default function Misplaylists({ currentUser, actualTrack, playlists }) {
                     <Hola currentUser={currentUser} />
                 </div>
 
+                {/* renderiza un lista de targetas segun las playlist del usuario */}
                 <div className="cuerpo">
                     {playlists && playlists.items && playlists.items
-                        .filter(item => 
-                            item.owner.display_name === currentUser.display_name && 
+                        .filter(item =>
+                            item.owner.display_name === currentUser.display_name &&
                             item.tracks.total !== 0
                         )
                         .map((playlist, index) => {
                             return <Targeta key={index}
-                            playlists={playlist && playlist.images ? (playlist.images[0].url) : {noImagePlaylist}}
-                            titulo={playlist ? playlist.name : 'SIN NOMBRE'}
-                            descripcion={playlist ? playlist.description : ''}
-                            botonTexto="VER"
-                            direccion={`/verplaylist/${playlist.id}`}
-                            currentUser={currentUser}
-                            contexto="misplaylists"
-                            playlistid={playlist.id}
-                          />;
+                                playlists={playlist && playlist.images ? (playlist.images[0].url) : { noImagePlaylist }}
+                                titulo={playlist ? playlist.name : 'SIN NOMBRE'}
+                                descripcion={playlist ? playlist.description : ''}
+                                botonTexto="VER"
+                                direccion={`/verplaylist/${playlist.id}`}
+                                currentUser={currentUser}
+                                contexto="misplaylists"
+                                playlistid={playlist.id}
+                            />;
                         })}
 
                 </div>

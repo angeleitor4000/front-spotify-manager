@@ -5,6 +5,7 @@ import perfilVacio from "../images/perfilVacio.jpg"
 export default function Hola(props) {
     const { currentUser } = props;
 
+    //Las multiples comparaciones sirven para gestionar lo diferentes errores en caso de que el usuario tenga foto o nombre o no
     const getUserImage = (images) => {
         if (!images || images.length === 0) return null;
         return images[1] ? images[1].url : images[0].url; // Fallback al primer índice si el segundo no existe

@@ -4,8 +4,10 @@ import Hola from "../components/Hola";
 import Targeta from "../components/Targeta";
 
 export default function Home({ currentUser, actualTrack, playlists }) {
-  const [loading, setLoading] = useState(true);
 
+  //La logica de los metodos refresh login se encuentra en todas las pagina para 
+  //asegurarse de que hay un usuario autenticado
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -42,6 +44,7 @@ export default function Home({ currentUser, actualTrack, playlists }) {
           <Hola currentUser={currentUser} />
         </div>
 
+        {/* Renderiza una Targeta diseñada con parametros*/}
         <div className="cuerpo">
           <Targeta
             playlists={playlists ? playlists : 'URL_POR_DEFECTO'}

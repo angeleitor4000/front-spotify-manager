@@ -5,6 +5,7 @@ import noaudio from "../images/noaudio.png"
 export default function Escuchando(props) {
     const { actualTrack } = props;
 
+    //Las multiples comparaciones sirven para gestionar lo diferentes errores en caso de que no se este escuchando una cancion
     return (
         <div className="hola-escuchando-container">
             {actualTrack.item && <h1>Estas escuchando:</h1>}

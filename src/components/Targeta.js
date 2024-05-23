@@ -1,10 +1,13 @@
 import '../styles/Targeta.css';
-import noImagePlaylist from '../images/NoImagePlaylist.png'; // Ruta de la imagen de stock
+import noImagePlaylist from '../images/NoImagePlaylist.png';
 
 export default function Targeta({ playlists, currentUser, titulo, descripcion, botonTexto, direccion, contexto }) {
 
+    //Contexto es un prop importante para gestionar la forma de la targeta segun su proposito
+
     let images = []
 
+    //Logica para mostrar en icono las portadas de las multiples playlists del usuario
     if(contexto ==="playlists"){
     // Obtener hasta 4 imágenes de las primeras playlists del usuario actual
         images = playlists && playlists.items

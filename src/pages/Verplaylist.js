@@ -6,16 +6,19 @@ import cargando from "../images/cargando.gif"
 import Table from "../components/Lista"
 
 export default function Verplaylist({ currentUser, actualTrack, playlists }) {
+
+    //La logica de los metodos refresh login se encuentra en todas las pagina para 
+    //asegurarse de que hay un usuario autenticado
     const [loading, setLoading] = useState(true);
     const [tracks, setTracks] = useState([])
     const { playlistid } = useParams();
 
+    //Recibe las canciones de la playlist pasada por la url mediante la targeta
     const getPlaylistTracks = useCallback(async () => {
         try {
             const response = await fetch(`http://localhost:3000/getplaylisttracks/${playlistid}`);
             const data = await response.json();
             setTracks(data);
-            //console.log(data[30].track.album.images[0].url)
         } catch (error) {
             console.error("Error fetching user:", error);
         }
@@ -44,8 +47,6 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
     }
 
 
-
-
     return (
         <div className="home-container">
 
@@ -70,11 +71,12 @@ export default function Verplaylist({ currentUser, actualTrack, playlists }) {
                     <Hola currentUser={currentUser} />
                 </div>
 
+                {/* Si la playlist tiene canciones, renderiza una lista con estas. */}
                 <div className="cuerpo">
                     {tracks.length <= 0 ? (<img src={cargando} alt="cargando" />
                     ) : (
                         <div className="table-container">
-                            <Table tracks={tracks} playlists={playlists} currentUser={currentUser}/>
+                            <Table tracks={tracks} playlists={playlists} currentUser={currentUser} />
                         </div>
                     )}
 

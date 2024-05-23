@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default function CuerpoTabla({ currentTracks, indexOfFirstTrack, selectedTracks, toggleTrackSelection, formatDuration, defaultHola }) {
+
+    //Subdivision del cuerpo de la tabla por comodidad a la hora de interpretar el codigo.
+    //No tiene ninguna funcionalidad adicional
     return (
         <tbody>
             {currentTracks.map((track, index) => (
