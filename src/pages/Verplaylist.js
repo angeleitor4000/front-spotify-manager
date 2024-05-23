@@ -2,7 +2,6 @@ import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-//import Targeta from "../components/Targeta";
 import cargando from "../images/cargando.gif"
 import Table from "../components/Lista"
 

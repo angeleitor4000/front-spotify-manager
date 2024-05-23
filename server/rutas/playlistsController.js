@@ -1,6 +1,12 @@
+
+//Controlador dedicado a las peticiones relacionadas con la gestion de playlists (Muy relevante)
+// (GET, PUT, DELETE tracks)
+//Futura implementacion: delete playlist (No es muy relevante ya que no es una funcion extra a spotify oficial)
 module.exports = function (express, spotifyApi, bodyParser) {
   var playlistsController = express.Router();
 
+  //Metodo que obtiene las playlists del usuario
+  //Posteriormente en el front se gestionara para mostrar solo las guardas por el usuario
   playlistsController.get('/getplaylists', async (req, res, next) => {
     try {
       res.header('Access-Control-Allow-Origin', '*');
@@ -11,17 +17,27 @@ module.exports = function (express, spotifyApi, bodyParser) {
     }
   });
 
+  //Metodo que recibe el id de una playlist (por el front) y devuelve sus canciones.
+  //Dado que la llamada a la api de spotify tiene un limite de 50 elementos por llamada,
+  //existe el argumento "offset", el cual facilita multiples llamadas a elementos continuos
+  //para recoger datos de playlists mas largas.
   playlistsController.get('/getplaylisttracks/:playlistid', async (req, res, next) => {
     try {
       res.header('Access-Control-Allow-Origin', '*');
 
+      //Array para almacenar los datos en multiples iteraciones
       let allTracks = [];
+      //posicion inicial para la llamada
       let offset = 0;
+      //limite maximo. Se puede reducir si asi se desea pero no aumentar de 50
       const limit = 50;
 
+      //Llama inicial para las 50 primeras
       let result = await spotifyApi.getPlaylistTracks(req.params.playlistid, { limit, offset });
       allTracks = allTracks.concat(result.body.items);
 
+      //En caso de que existan mas registros desues de 50, se llama constantemente y se almacena en el array
+      //hasta el final
       while (result.body.next) {
         offset += limit;
         result = await spotifyApi.getPlaylistTracks(req.params.playlistid, { limit, offset });
@@ -34,13 +50,17 @@ module.exports = function (express, spotifyApi, bodyParser) {
     }
   });
 
+
+  //recibe el id de una playlists como argumento URL y un JSON con las uris de las canciones a eliminar en el body
   playlistsController.delete("/eliminarcancionesplaylist/:playlistid", async (req, res, next) => {
     try {
       res.header('Access-Control-Allow-Origin', '*');
 
-      const { tracks } = req.body;
+      const { tracks } = req.body
+      //formatea las uris recibidas correctamente para que se adapten al metodo de la libreria de la api
       const formattedTracks = tracks.map(uri => ({ uri }));
 
+      //En caso de que por error llegue vacio. No deberia de pasar ya que esta gestionado en el front
       if (!Array.isArray(tracks) || tracks.length === 0) {
         return res.status(400).json({ error: "Se esperaba un array de canciones para eliminar." });
       }
@@ -52,13 +72,15 @@ module.exports = function (express, spotifyApi, bodyParser) {
     }
   });
 
+
+  //Metodo que recibe un array de uris + un array de las playlists seleccionadas en el body como json para añadirlas a una playlist existente
   playlistsController.put("/addtrackstoexistplaylists", async (req, res, next) => {
     try {
       res.header('Access-Control-Allow-Origin', '*');
   
       const { tracks, selectedPlaylists } = req.body;
-      const formattedTracks = tracks.map(uri => ({ uri }));
   
+      //En caso de que llegue vacio. No deberia de pasar
       if (!Array.isArray(tracks) || tracks.length === 0) {
         return res.status(400).json({ error: "Se esperaba un array de canciones para añadir." });
       }
@@ -73,21 +95,24 @@ module.exports = function (express, spotifyApi, bodyParser) {
     }
   });
 
-
+  //Similar al anterior. Recibe el json de las uris por el body y el nombre de la nueva playlist por la url
   playlistsController.put("/addtrackstonewplaylists/:nombreplaylist", async (req, res, next) => {
     try {
       res.header('Access-Control-Allow-Origin', '*');
 
       const { tracks } = req.body;
       const nombrePlaylist = req.params.nombreplaylist;
-      const formattedTracks = tracks.map(uri => ({ uri }));
 
+      //En caso de que llegue vacio
       if (!Array.isArray(tracks) || tracks.length === 0) {
         return res.status(400).json({ error: "Se esperaba un array de canciones para añadir." });
       }
 
+      //Crea una playlist vacia con el nombre de la playlist
       const result = await spotifyApi.createPlaylist(nombrePlaylist, {description: ""});
+      //Recoge el id de la nueva playlist
       const newPlaylistId = result.body.id;
+      //Añade las canciones a la nueva playlist por el id
       await spotifyApi.addTracksToPlaylist(newPlaylistId, tracks);
 
       res.status(200).json({ message: "Playlist creada y canciones añadidas con éxito." });

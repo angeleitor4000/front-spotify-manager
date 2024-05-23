@@ -10,10 +10,13 @@ import "./styles/App.css";
 import "./styles/Global.css";
 
 function App() {
+
+  //Estados elevados ya que se usan en multiples componentes hijos
   const [currentUser, setCurrentUser] = useState([]);
   const [actualTrack, setActualTrack] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
+  //Obtiene
   useEffect(() => {
     getCurrentUser();
     getPlaylists()

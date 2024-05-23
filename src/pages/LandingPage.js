@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default function LandingPage() {
+
+    //Los estilos estan en local y no en un css aparte para probar
+    //la implementacion de estilos declarativos en react
+
     const landingPageStyle = {
         display: "flex",
         flexDirection: "column",
