@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNew }) {
-
-    //Importante recibir los metodos como props para poder ser utilizados en el modal.
-
+    const [showConfirmation, setShowConfirmation] = useState(false); // Estado para controlar si se muestra el mensaje de confirmación
     const [newPlaylistNameInput, setNewPlaylistNameInput] = useState("");
+
+    useEffect(() => {
+        // Si showConfirmation es true, se cierra el modal después de 3 segundos
+        let timeout;
+        if (showConfirmation) {
+            timeout = setTimeout(() => {
+                setShowModal(false);
+                setShowConfirmation(false); // Ocultar mensaje de confirmación
+                setNewPlaylistNameInput(""); // Limpiar el input al cerrar el modal
+            }, 3000);
+        }
+        return () => clearTimeout(timeout); // Limpiar el timeout al desmontar el componente
+    }, [showConfirmation, setShowModal]);
 
     const handleInputChange = (event) => {
         setNewPlaylistNameInput(event.target.value);
     };
 
     const handleCreatePlaylist = () => {
-        handleAddSelectedTracksToNew(newPlaylistNameInput); // Pasar el nombre de la nueva playlist al método handleAddSelectedTracksToNew
-        setShowModal(false);
-        setNewPlaylistNameInput(""); // Limpiar el input al cerrar el modal
+        setShowConfirmation(true); // Mostrar mensaje de confirmación
+        setTimeout(() => {
+            handleAddSelectedTracksToNew(newPlaylistNameInput); // Llamar a handleAddSelectedTracksToNew después de 3 segundos
+        }, 3000);
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
+        setShowConfirmation(false); // Ocultar mensaje de confirmación
         setNewPlaylistNameInput(""); // Limpiar el input al cerrar el modal
     };
 
@@ -37,6 +50,14 @@ function ModalPlaylistNew({ showModal, setShowModal, handleAddSelectedTracksToNe
                             <button onClick={handleCloseModal} className='buttonRed'>Cancelar</button>
                             <button onClick={handleCreatePlaylist} className='buttonBlue'>Crear Playlist</button>
                         </div>
+                    </div>
+                </div>
+            )}
+            {/* Mostrar el mensaje de confirmación si se ha creado la playlist */}
+            {showConfirmation && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Canciones añadidas con éxito a: <b>{newPlaylistNameInput}</b></h2>
                     </div>
                 </div>
             )}

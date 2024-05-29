@@ -4,7 +4,7 @@ require('dotenv').config()
 
 // Definir politicas y permisos que va a pedir al usuario
 const SpotifyWebApi = require("spotify-web-api-node");
-scopes = ['user-read-private', 'user-read-email','playlist-modify-public','playlist-modify-private, playlist-read-private', 'user-read-currently-playing', 'playlist-read-collaborative']
+scopes = ['user-read-private', 'user-read-email','playlist-modify-public','playlist-modify-private, playlist-read-private', 'user-read-currently-playing', 'playlist-read-collaborative', 'user-library-read']
 
 //Solucion error cors
 var app = express()
@@ -22,8 +22,10 @@ const spotifyApi = new SpotifyWebApi({
 //Controladores adicionales en /rutas para mayor claridad y distribucion de codigo.
 var landingPageController = require('./rutas/landingPageController')(express, spotifyApi);
 var playlistsController = require('./rutas/playlistsController')(express, spotifyApi);
+var albumController = require('./rutas/albumController')(express, spotifyApi);
 app.use(landingPageController);
 app.use(playlistsController);
+app.use(albumController);
 
 //Metodo para comprobar que la api se ejecuta correctamente, no tiene utilidad en el proyecto
 app.get('/funciona', (req, res, next) => {

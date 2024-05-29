@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/ModalTablaAdd.css"
 
 export default function ModalPlaylistExisting({ currentUser, showModal, setShowModal, playlists, handleAddSelectedTracksToExist }) {
-
-    //Importante recibir los metodos como props para poder ser utilizados en el modal.
-
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
+    const [showConfirmation, setShowConfirmation] = useState(false); // Estado para controlar si se muestra el mensaje de confirmación
+
+    useEffect(() => {
+        let timeout;
+        // Si showConfirmation es true, establecemos un timeout para ocultar el mensaje de confirmación después de 3 segundos
+        if (showConfirmation) {
+            timeout = setTimeout(() => {
+                setShowConfirmation(false); // Ocultar el mensaje de confirmación después de 3 segundos
+            }, 3000);
+        }
+        // Limpiar el timeout cuando el componente se desmonta o cuando showConfirmation cambia a false
+        return () => clearTimeout(timeout);
+    }, [showConfirmation]);
 
     function togglePlaylistSelection(playlistId) {
         const isSelected = selectedPlaylists.includes(playlistId);
@@ -17,8 +27,12 @@ export default function ModalPlaylistExisting({ currentUser, showModal, setShowM
     }
 
     function handleAddTracksToSelectedPlaylists() {
-        handleAddSelectedTracksToExist(selectedPlaylists);
-        setShowModal(false);
+        setShowConfirmation(true); // Mostrar el mensaje de confirmación
+        // Llamar a la función para agregar las canciones a las playlists seleccionadas después de 3 segundos
+        setTimeout(() => {
+            handleAddSelectedTracksToExist(selectedPlaylists);
+            setShowModal(false); // Cerrar el modal después de agregar las canciones
+        }, 3000);
     }
 
     return (
@@ -60,6 +74,14 @@ export default function ModalPlaylistExisting({ currentUser, showModal, setShowM
                             <button onClick={() => setShowModal(false)} className='buttonRed'>Cancelar</button>
                             <button onClick={handleAddTracksToSelectedPlaylists} className='buttonBlue'>Añadir</button>
                         </div>
+                    </div>
+                </div>
+            )}
+            {/* Mostrar el mensaje de confirmación si se han añadido las canciones */}
+            {showConfirmation && (
+                <div className="modal-exist">
+                    <div className="modal-content">
+                        <h2>Canciones añadidas con éxito a las playlists seleccionadas</h2>
                     </div>
                 </div>
             )}

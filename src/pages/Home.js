@@ -3,7 +3,7 @@ import Escuchando from "../components/Escuchando";
 import Hola from "../components/Hola";
 import Targeta from "../components/Targeta";
 
-export default function Home({ currentUser, actualTrack, playlists }) {
+export default function Home({ currentUser, actualTrack, playlists, albums }) {
 
   //La logica de los metodos refresh login se encuentra en todas las pagina para 
   //asegurarse de que hay un usuario autenticado
@@ -55,7 +55,18 @@ export default function Home({ currentUser, actualTrack, playlists }) {
             currentUser={currentUser}
             contexto="playlists"
           />
-          
+
+
+          <Targeta
+            playlists={albums ? albums : 'URL_POR_DEFECTO'}
+            titulo="Mis albunes guardados"
+            descripcion="Añade canciones de tus albunes guardadados a tus playlists"
+            botonTexto="VER"
+            direccion="/albumshome"
+            currentUser={currentUser}
+            contexto="albums"
+          />
+
 
         </div>
 

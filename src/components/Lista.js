@@ -7,7 +7,7 @@ import ModalPlaylistNew from './ModalPlaylistNew';
 import ModalPlaylistExisting from './ModalPlaylistExisting';
 import CuerpoTabla from './CuerpoTabla';
 
-export default function Lista({ tracks, playlists, currentUser }) {
+export default function Lista({ tracks, playlists, currentUser, contexto = "playlists", albumname, albumImg }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [tracksPerPage, setTracksPerPage] = useState(10);
     const [selectedTracks, setSelectedTracks] = useState(new Set());
@@ -33,7 +33,12 @@ export default function Lista({ tracks, playlists, currentUser }) {
     const filteredTracks = tracks.filter(track => {
         const trackName = track?.track?.name?.toLowerCase() || '';
         const artistName = track?.track?.artists[0]?.name?.toLowerCase() || '';
-        const albumName = track?.track?.album?.name?.toLowerCase() || '';
+        var albumName= "";
+        if(contexto === "albums"){
+            albumName = albumname
+        }else if (contexto === "playlists"){
+            albumName = track?.track?.album?.name?.toLowerCase() || '';
+        }
         const concatenatedString = `${trackName} ${artistName} ${albumName}`;
         const searchWords = searchQuery.split(" ");
         return searchWords.every(word => concatenatedString.includes(word));
@@ -157,7 +162,7 @@ export default function Lista({ tracks, playlists, currentUser }) {
 
             <div className='button-container'>
                 {/* Abre el modal de confirmación al hacer clic */}
-                <button onClick={() => setShowConfirmationModal(true)} disabled={selectedTracks.size === 0} className={'buttonRed'}>Eliminar Seleccionados</button>
+                {contexto === "playlists" && <button onClick={() => setShowConfirmationModal(true)} disabled={selectedTracks.size === 0} className={'buttonRed'}>Eliminar Seleccionados</button>}
                 <button onClick={() => setShowNewModal(true)} disabled={selectedTracks.size === 0} className={'buttonBlue'}>Añadir a nueva playlist</button>
                 <button onClick={() => setShowExistingModal(true)} disabled={selectedTracks.size === 0} className={'buttonBlue'}>Añadir a playlists existentes</button>
                 <button onClick={handleSelectAll} disabled={currentTracks.length === 0} className={'buttonGreen'}>Seleccionar Todo</button>
@@ -183,6 +188,8 @@ export default function Lista({ tracks, playlists, currentUser }) {
                     toggleTrackSelection={toggleTrackSelection}
                     formatDuration={formatDuration}
                     defaultHola={defaultHola}
+                    contexto={contexto}
+                    imagenAlbum={albumImg}
                 />
             </table>
             <ModalPlaylistNew

@@ -8,24 +8,33 @@ export default function Targeta({ playlists, currentUser, titulo, descripcion, b
     let images = []
 
     //Logica para mostrar en icono las portadas de las multiples playlists del usuario
-    if(contexto ==="playlists"){
-    // Obtener hasta 4 imágenes de las primeras playlists del usuario actual
+    if (contexto === "playlists") {
+        // Obtener hasta 4 imágenes de las primeras playlists del usuario actual
         images = playlists && playlists.items
-        ? playlists.items
-            .filter(item => item.owner.display_name === currentUser.display_name) // Filtrar las playlists del usuario actual
-            .slice(0, 4)
-            .map(item => item.images[0].url ? item.images[0].url : noImagePlaylist)
-        : [];
+            ? playlists.items
+                .filter(item => item.owner.display_name === currentUser.display_name) // Filtrar las playlists del usuario actual
+                .slice(0, 4)
+                .map(item => item.images[0].url ? item.images[0].url : noImagePlaylist)
+            : [];
     }
 
-    if(contexto === "misplaylists"){
-        if(playlists.length > 0){
-            images=[playlists]
+    if (contexto === "misplaylists") {
+        if (playlists.length > 0) {
+            images = [playlists]
         }
     }
 
-    if(contexto === "libre"){
-       images = [playlists]
+    if (contexto === "albums") {
+        // Obtener hasta 4 imágenes de los primeros álbumes del usuario actual
+        images = playlists && playlists.items
+            ? playlists.items
+                .slice(0, 4)
+                .map(item => item.album.images[0]?.url || noImagePlaylist)
+            : [];
+    }    
+
+    if (contexto === "libre") {
+        images = [playlists]
     }
 
     // Si no hay imágenes, usar la imagen de stock
@@ -43,7 +52,7 @@ export default function Targeta({ playlists, currentUser, titulo, descripcion, b
                     <h2 className="targeta-titulo">{titulo}</h2>
                     <p className="targeta-descripcion">{descripcion}</p>
                     <a href={direccion}>
-                        <button style={{marginBottom: "15px"}}>{botonTexto}</button>
+                        <button style={{ marginBottom: "15px" }}>{botonTexto}</button>
                     </a>
                 </div>
             </div>
