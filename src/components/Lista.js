@@ -174,9 +174,9 @@ export default function Lista({ tracks, playlists, currentUser, contexto = "play
                         <th>#</th>
                         <th></th>
                         <th>Titulo</th>
-                        <th>Album</th>
+                        {contexto === "playlists" && <th>Album</th>}
                         <th>Artista</th>
-                        <th>Añadido el</th>
+                        {contexto === "playlists" && <th>Añadido el</th>}
                         <th>Duracion</th>
                         <th>Seleccionar</th>
                     </tr>
