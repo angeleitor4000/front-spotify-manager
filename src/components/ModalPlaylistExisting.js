@@ -53,6 +53,7 @@ export default function ModalPlaylistExisting({ currentUser, showModal, setShowM
                                 <tbody>
                                     {playlists.items
                                         .filter(item => item.owner.display_name === currentUser.display_name)
+                                        .sort((a, b) => a.name.localeCompare(b.name)) // Ordenar alfabéticamente por nombre mediante metodo sort
                                         .map(playlist => (
                                             <tr key={playlist.id}>
                                                 <td className='checkbox-container'>
