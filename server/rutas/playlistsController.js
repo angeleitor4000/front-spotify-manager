@@ -112,13 +112,20 @@ module.exports = function (express, spotifyApi, bodyParser) {
 
       const { tracks, selectedPlaylists } = req.body;
 
-      //En caso de que llegue vacio. No deberia de pasar
+      // En caso de que llegue vacío. No debería pasar
       if (!Array.isArray(tracks) || tracks.length === 0) {
         return res.status(400).json({ error: "Se esperaba un array de canciones para añadir." });
       }
 
+      // Filtrar las canciones locales
+      const filteredTracks = tracks.filter(track => !track.is_local);
+
+      if (filteredTracks.length === 0) {
+        return res.status(400).json({ error: "No se pueden añadir canciones locales a la playlist." });
+      }
+
       for (const playlistId of selectedPlaylists) {
-        await spotifyApi.addTracksToPlaylist(playlistId, tracks);
+        await spotifyApi.addTracksToPlaylist(playlistId, filteredTracks);
       }
 
       res.status(200).json({ message: "Canciones añadidas con éxito a las playlists seleccionadas." });
@@ -135,17 +142,24 @@ module.exports = function (express, spotifyApi, bodyParser) {
       const { tracks } = req.body;
       const nombrePlaylist = req.params.nombreplaylist;
 
-      //En caso de que llegue vacio
+      // En caso de que llegue vacío
       if (!Array.isArray(tracks) || tracks.length === 0) {
         return res.status(400).json({ error: "Se esperaba un array de canciones para añadir." });
       }
 
-      //Crea una playlist vacia con el nombre de la playlist
+      // Filtrar las canciones locales
+      const filteredTracks = tracks.filter(track => !track.is_local);
+
+      if (filteredTracks.length === 0) {
+        return res.status(400).json({ error: "No se pueden añadir canciones locales a la playlist." });
+      }
+
+      // Crear una playlist vacía con el nombre de la playlist
       const result = await spotifyApi.createPlaylist(nombrePlaylist, { description: "" });
-      //Recoge el id de la nueva playlist
+      // Recoger el id de la nueva playlist
       const newPlaylistId = result.body.id;
-      //Añade las canciones a la nueva playlist por el id
-      await spotifyApi.addTracksToPlaylist(newPlaylistId, tracks);
+      // Añadir las canciones a la nueva playlist por el id
+      await spotifyApi.addTracksToPlaylist(newPlaylistId, filteredTracks);
 
       res.status(200).json({ message: "Playlist creada y canciones añadidas con éxito." });
     } catch (err) {

@@ -27,16 +27,16 @@ export default function Lista({ tracks, playlists, currentUser, contexto = "play
 
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value.toLowerCase());
-        setCurrentPage(1); 
+        setCurrentPage(1);
     };
 
     const filteredTracks = tracks.filter(track => {
         const trackName = track?.track?.name?.toLowerCase() || '';
         const artistName = track?.track?.artists[0]?.name?.toLowerCase() || '';
-        var albumName= "";
-        if(contexto === "albums"){
+        var albumName = "";
+        if (contexto === "albums") {
             albumName = albumname
-        }else if (contexto === "playlists"){
+        } else if (contexto === "playlists") {
             albumName = track?.track?.album?.name?.toLowerCase() || '';
         }
         const concatenatedString = `${trackName} ${artistName} ${albumName}`;
@@ -105,12 +105,22 @@ export default function Lista({ tracks, playlists, currentUser, contexto = "play
 
     async function handleAddSelectedTracksToNew(newPlaylistName) {
         try {
+            const nonLocalTracks = Array.from(selectedTracks).filter(trackUri => {
+                const track = tracks.find(t => t.track.uri === trackUri);
+                return track && !track.track.is_local;
+            });
+
+            if (nonLocalTracks.length === 0) {
+                console.error('No se pueden añadir canciones locales a la playlist.');
+                return;
+            }
+
             const response = await fetch(`http://localhost:3000/addtrackstonewplaylists/${newPlaylistName}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ tracks: Array.from(selectedTracks) })
+                body: JSON.stringify({ tracks: nonLocalTracks })
             });
             if (response.ok) {
                 console.log("Canciones añadidas con éxito.");
@@ -123,14 +133,25 @@ export default function Lista({ tracks, playlists, currentUser, contexto = "play
         }
     }
 
+
     async function handleAddSelectedTracksToExist(selectedPlaylistsIds) {
         try {
+            const nonLocalTracks = Array.from(selectedTracks).filter(trackUri => {
+                const track = tracks.find(t => t.track.uri === trackUri);
+                return track && !track.track.is_local;
+            });
+
+            if (nonLocalTracks.length === 0) {
+                console.error('No se pueden añadir canciones locales a la playlist.');
+                return;
+            }
+
             const response = await fetch(`http://localhost:3000/addtrackstoexistplaylists`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ tracks: Array.from(selectedTracks), selectedPlaylists: selectedPlaylistsIds })
+                body: JSON.stringify({ tracks: nonLocalTracks, selectedPlaylists: selectedPlaylistsIds })
             });
             if (response.ok) {
                 console.log("Canciones añadidas con éxito.");
@@ -142,6 +163,7 @@ export default function Lista({ tracks, playlists, currentUser, contexto = "play
             console.error('Error al añadir canciones:', error);
         }
     }
+
 
     return (
         <div>

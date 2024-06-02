@@ -82,6 +82,11 @@
         align-items: center;
     }
 
+    /*
+    Altera el orden en que se colocan los componentes dentro de un contenedor
+
+    */
+
     .izquierda {
         order: 2;
     }
