@@ -171,7 +171,8 @@ export default function Lista({ tracks, playlists, currentUser, contexto = "play
             <div className="page-controls">
                 <label htmlFor='elementosxpagina'>Selecciona pistas por página: </label>
                 <input type='text' id='elementosxpagina' placeholder={tracksPerPage} onChange={handleChangePagesSize} />
-                <p>Página: {currentPage} de {Math.ceil(totalTracks / tracksPerPage)}</p>
+                <p> | Página: <b>{currentPage}</b> de <b>{Math.ceil(totalTracks / tracksPerPage)}</b>| </p>
+                <p> | Nº canciones: <b>{tracks.length} </b>|</p>
                 <input type='text' id='buscadorcanciones' placeholder={"Buscar cancion..."} onChange={handleSearchInputChange} className='buscador' />
             </div>
 
