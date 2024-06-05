@@ -7,16 +7,20 @@ export default function Targeta({ playlists, currentUser, titulo, descripcion, b
 
     let images = []
 
-    //Logica para mostrar en icono las portadas de las multiples playlists del usuario
+    // Lógica para mostrar en icono las portadas de las múltiples playlists del usuario
     if (contexto === "playlists") {
         // Obtener hasta 4 imágenes de las primeras playlists del usuario actual
-        images = playlists && playlists.items
+        images = playlists && playlists.items && currentUser
             ? playlists.items
-                .filter(item => item.owner.display_name === currentUser.display_name) // Filtrar las playlists del usuario actual
+                .filter(item =>
+                    item.owner.display_name === currentUser.display_name &&
+                    item.images && item.images.length > 0
+                )
                 .slice(0, 4)
-                .map(item => item.images[0].url ? item.images[0].url : noImagePlaylist)
+                .map(item => item.images[0]?.url ? item.images[0].url : noImagePlaylist)
             : [];
     }
+
 
     if (contexto === "misplaylists") {
         if (playlists.length > 0) {
@@ -31,7 +35,7 @@ export default function Targeta({ playlists, currentUser, titulo, descripcion, b
                 .slice(0, 4)
                 .map(item => item.album.images[0]?.url || noImagePlaylist)
             : [];
-    }    
+    }
 
     if (contexto === "libre") {
         images = [playlists]
