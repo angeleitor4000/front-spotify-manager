@@ -44,12 +44,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Alinea los elementos verticalmente y distribuye el espacio entre ellos */
-    height: 100%; /* Asegura que la altura de la sección sea el 100% del contenedor */
+    justify-content: space-between;
+    height: 100%;
 }
 .targeta-contenido button {
-    margin-top: auto; /* El botón se colocará siempre al final de la sección */
-    margin-bottom: 15px; /* Añade un margen inferior adicional para separarlo del borde */
+    margin-top: auto; 
+    margin-bottom: 15px;
     padding: 5px 30px;
     font-size: 22px;
 }
