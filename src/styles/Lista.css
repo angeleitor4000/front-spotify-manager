@@ -113,13 +113,11 @@ input[type="text"] {
     cursor: pointer;
 }
 
-
 .button-container .buttonRed {
     background-color: #d62323;
     border-radius: 50px;
 
 }
-
 
 .button-container .buttonBlue {
     background-color: #23acd6;
@@ -155,8 +153,6 @@ input[type="text"] {
     background-color: #a3a3a3;
     cursor: not-allowed;
 }
-
-
 
 .button-container .buttonBlue:disabled {
     background-color: #a3a3a3;

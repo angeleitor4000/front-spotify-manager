@@ -11,7 +11,6 @@ var app = express()
 app.use(cors());
 app.use(express.json());
 
-
 //Crear objeto que contiene los metodos de llamada a la API
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID, // privadas con env en .env
